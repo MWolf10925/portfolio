@@ -8,7 +8,7 @@ export function Skills() {
   return (
     <section id="skills" className="scroll-mt-20 py-24">
       <div className="container">
-        <SectionHeading eyebrow="Toolkit" title="Skills" />
+        <SectionHeading number="03" title="Skills" />
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {skillGroups.map((group, i) => (

@@ -10,15 +10,17 @@ export interface Project {
   tags: string[];
   status?: string;
   href?: string;
+  featured?: boolean;
 }
 
 export const projects: Project[] = [
   {
     title: "Robotics Autonomous Systems",
     description:
-      "C++ robotics software for VEX competition, including autonomous routines, odometry, sensors, driver-control systems, and structured testing.",
+      "C++ robotics software for VEX competition, including autonomous routines, odometry, sensors, driver-control systems, and structured testing. The backbone of a Worlds-qualified competition robot.",
     tags: ["C++", "VEX V5", "Odometry", "Sensors", "Autonomous"],
     status: "Competition",
+    featured: true,
   },
   {
     title: "Private Robotics PID Tuning Workflow",

@@ -20,10 +20,26 @@ export const site = {
   },
 
   hero: {
+    badge: "Open to internships & project work",
     headline: "I build robotics software, automation tools, and practical AI workflows.",
     subheadline:
       "I'm Matthew Wolf, a high school developer and VEX robotics lead programmer focused on C++, automation, web tools, and real-world problem solving.",
+    // Short mono "currently" line under the hero.
+    currently: "Product Automation Eng. intern @ Instant Quote · competitive VEX C++",
   },
+
+  education: [
+    {
+      school: "Northern Kentucky University",
+      detail: "Early College — college coursework",
+      period: "Current",
+    },
+    {
+      school: "Randall K. Cooper High School",
+      detail: "High school diploma track",
+      period: "Current",
+    },
+  ],
 
   about: {
     heading: "How I build",

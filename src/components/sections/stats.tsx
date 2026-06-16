@@ -6,8 +6,8 @@ export function Stats() {
     <section className="border-y border-border bg-card/30">
       <div className="container py-16">
         <Reveal className="mb-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-            Proof
+          <p className="font-mono text-sm font-medium text-primary">
+            00 <span className="text-muted-foreground">/ Proof</span>
           </p>
         </Reveal>
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">

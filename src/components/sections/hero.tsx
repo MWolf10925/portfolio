@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Github, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { site } from "@/data/site";
 
@@ -30,8 +30,12 @@ export function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={item}>
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs text-muted-foreground">
+        <motion.div variants={item} className="flex flex-wrap items-center gap-3">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 font-mono text-xs text-foreground/90">
+            <span className="status-dot" />
+            {site.hero.badge}
+          </span>
+          <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
             <MapPin className="h-3.5 w-3.5 text-primary" />
             {site.location}
           </span>
@@ -51,6 +55,15 @@ export function Hero() {
           {site.hero.subheadline}
         </motion.p>
 
+        <motion.p
+          variants={item}
+          className="mt-5 flex items-center gap-2 font-mono text-sm text-muted-foreground"
+        >
+          <span className="text-primary">currently</span>
+          <span className="text-primary">→</span>
+          <span className="text-foreground/80">{site.hero.currently}</span>
+        </motion.p>
+
         <motion.div variants={item} className="mt-9 flex flex-wrap gap-3">
           <Button asChild size="lg">
             <a href="#projects">
@@ -62,6 +75,12 @@ export function Hero() {
             <a href="#contact">
               <Mail className="h-4 w-4" />
               Contact Me
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="ghost">
+            <a href={site.links.github} target="_blank" rel="noopener noreferrer">
+              <Github className="h-4 w-4" />
+              GitHub
             </a>
           </Button>
         </motion.div>

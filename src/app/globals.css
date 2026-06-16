@@ -64,6 +64,13 @@
   ::selection {
     background: hsl(var(--primary) / 0.25);
   }
+
+  /* Visible keyboard focus in the accent color — accessibility + polish. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary) / 0.7);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
 @layer utilities {
@@ -76,4 +83,33 @@
     background-size: 44px 44px;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 75%);
   }
+  /* Mono metadata label — section numbers, dates, "currently" lines, tags. */
+  .mono-label {
+    @apply font-mono text-xs tracking-tight text-muted-foreground;
+  }
+}
+
+/* Pulsing availability dot (respects reduced-motion). */
+.status-dot {
+  position: relative;
+  display: inline-block;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 9999px;
+  background: hsl(142 70% 45%);
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: hsl(142 70% 45%);
+  animation: status-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes status-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot::after { animation: none; }
 }

@@ -9,7 +9,7 @@ export function Experience() {
       className="scroll-mt-20 border-y border-border bg-card/30 py-24"
     >
       <div className="container">
-        <SectionHeading eyebrow="Track record" title="Experience" />
+        <SectionHeading number="04" title="Experience" />
 
         <div className="relative">
           {/* vertical line */}
@@ -25,7 +25,7 @@ export function Experience() {
                       {job.role}
                     </h3>
                     {job.period && (
-                      <span className="text-sm text-muted-foreground">
+                      <span className="font-mono text-xs text-muted-foreground">
                         {job.period}
                       </span>
                     )}
