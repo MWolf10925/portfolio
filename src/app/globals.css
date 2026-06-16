@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Premium dark theme — charcoal / slate base with a muted blue primary.
+  Orange is reserved as a rare robotics accent (--robotics) only.
+*/
+@layer base {
+  :root {
+    --background: 222 20% 7%;
+    --foreground: 210 20% 92%;
+
+    --card: 222 18% 9.5%;
+    --card-foreground: 210 20% 92%;
+
+    --muted: 220 14% 16%;
+    --muted-foreground: 215 14% 62%;
+
+    --primary: 212 56% 62%;
+    --primary-foreground: 222 30% 8%;
+
+    --secondary: 220 14% 14%;
+    --secondary-foreground: 210 20% 90%;
+
+    --accent: 215 28% 16%;
+    --accent-foreground: 210 20% 92%;
+
+    /* Rare robotics accent — use sparingly. */
+    --robotics: 24 88% 56%;
+
+    --border: 220 14% 17%;
+    --input: 220 14% 17%;
+    --ring: 212 56% 62%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Subtle ambient background glow + grid texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60rem 40rem at 70% -10%, hsl(212 56% 62% / 0.08), transparent 60%),
+      radial-gradient(50rem 40rem at 10% 10%, hsl(220 40% 40% / 0.05), transparent 55%);
+    pointer-events: none;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent;
+  }
+  .grid-texture {
+    background-image: linear-gradient(hsl(var(--border) / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 75%);
+  }
+}
