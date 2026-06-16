@@ -42,8 +42,10 @@
   * {
     @apply border-border;
   }
-  html {
-    scroll-behavior: smooth;
+  /* Smooth scrolling is handled by Lenis (JS); CSS smooth would conflict. */
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
   }
   body {
     @apply bg-background text-foreground antialiased;

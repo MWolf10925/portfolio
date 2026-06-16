@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/effects/smooth-scroll";
+import { Cursor } from "@/components/effects/cursor";
 import { site } from "@/data/site";
 
 const inter = Inter({
@@ -47,7 +49,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable} dark`}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <Cursor />
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }

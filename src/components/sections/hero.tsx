@@ -1,12 +1,16 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/effects/magnetic";
 import { Logo } from "@/components/brand/logo";
 import { site } from "@/data/site";
+
+// 3D hero is desktop-only and lazy (WebGL never blocks first paint / mobile).
+const MW3D = dynamic(() => import("@/components/three/mw-3d"), { ssr: false });
 
 const container = {
   hidden: {},
@@ -36,6 +40,14 @@ const wordVariant = {
 
 export function Hero() {
   const spotlightRef = useRef<HTMLDivElement>(null);
+  const [show3D, setShow3D] = useState(false);
+
+  useEffect(() => {
+    const ok =
+      window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setShow3D(ok);
+  }, []);
 
   function handleMove(e: React.MouseEvent<HTMLElement>) {
     const el = spotlightRef.current;
@@ -55,11 +67,18 @@ export function Hero() {
     >
       <div ref={spotlightRef} className="spotlight pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute inset-0 -z-10 grid-texture opacity-60" />
-      {/* Faint brand watermark */}
-      <Logo className="pointer-events-none absolute -right-10 top-1/2 -z-10 hidden h-[34rem] w-[34rem] -translate-y-1/2 text-foreground opacity-[0.04] lg:block" />
+
+      {/* 3D MW monogram (desktop) — or a faint flat watermark (tablet) */}
+      {show3D ? (
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <MW3D />
+        </div>
+      ) : (
+        <Logo className="pointer-events-none absolute -right-10 top-1/2 -z-10 hidden h-[34rem] w-[34rem] -translate-y-1/2 text-foreground opacity-[0.04] md:block lg:hidden" />
+      )}
 
       <motion.div
-        className="container max-w-3xl"
+        className="container relative z-10 max-w-3xl"
         variants={container}
         initial="hidden"
         animate="visible"
