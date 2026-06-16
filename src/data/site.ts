@@ -46,11 +46,10 @@ export const site = {
     body: "I'm not trying to look like a finished expert. I'm building proof through real projects — robotics systems, automation tools, web experiments, and AI workflows that solve actual problems. My focus is simple: learn fast, build useful things, test them, and keep improving.",
     // What I'm working toward (professional framing).
     buildingToward: [
-      "Building tools, systems, and businesses that are genuinely useful and help real people.",
-      "Independence — the freedom to choose what I work on and never be boxed into one path.",
-      "Respect earned through discipline, skill, and results — not attention.",
-      "Always on an incline: stronger, smarter, and more capable than I was last year.",
-      "Building something my family is proud of, and that younger people can look up to.",
+      "Tools and systems that are actually useful to real people.",
+      "Independence — never boxed into a single path.",
+      "Respect earned through skill and results, not attention.",
+      "Always improving. Always building.",
     ],
     // Skills I'm actively leveling up.
     learning: [

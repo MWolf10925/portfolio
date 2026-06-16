@@ -126,7 +126,7 @@ export function Projects() {
         <SectionHeading
           number="01"
           title="Featured projects"
-          description="A mix of competition robotics, internship automation work, and independent builds. Some are kept private to protect competitive or confidential code."
+          description="Competition robotics, internship automation, and independent builds. A few stay private to protect competitive or confidential code."
         />
 
         {/* Big alternating image rows */}

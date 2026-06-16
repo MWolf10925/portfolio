@@ -1,7 +1,6 @@
 // ───────────────────────────────────────────────────────────────────────────
 //  GAMES  ·  independently-built Roblox games
-//  Cover art goes in /public/games/. Add a `href` once each game is published
-//  to show a "Play" link.
+//  Cover art goes in /public/games/. Add a `href` once a game is published.
 // ───────────────────────────────────────────────────────────────────────────
 
 export interface Game {
@@ -9,7 +8,7 @@ export interface Game {
   genre: string;
   description: string;
   image: string;
-  href?: string; // Roblox link — add when ready
+  href?: string; // Roblox link — omit if unpublished/offline
 }
 
 export const games: Game[] = [
@@ -17,28 +16,28 @@ export const games: Game[] = [
     title: "Dark Hours",
     genre: "SCP Survival",
     description:
-      "An SCP-style survival game. Scavenge an IKEA-like map by day for items, weapons, and large objects across different plots of land — then defend yourself when night falls and the monsters come out.",
+      "Scavenge an IKEA-like map by day for items and weapons — then survive the monsters that come out at night.",
     image: "/games/dark-hours.png",
-  },
-  {
-    title: "Road Rage",
-    genre: "Open World",
-    description:
-      "An open-world driving game in the spirit of GTA. Roam a custom city map and earn money — my own take on the genre, built from the ground up.",
-    image: "/games/road-rage.png",
+    href: "https://www.roblox.com/games/18579942960/Dark-Hours",
   },
   {
     title: "Tower Offense",
     genre: "Strategy",
     description:
-      "A reverse tower-defense. Instead of holding off waves, you strategically attack the defenses, working around them with different characters and abilities.",
-    image: "/games/tower-offense.jpg",
+      "Reverse tower-defense: instead of holding off waves, you attack the defenses with different characters and abilities.",
+    image: "/games/tower-offense.png",
+    href: "https://www.roblox.com/games/112312927264179/Tower-Offense",
+  },
+  {
+    title: "Road Rage",
+    genre: "Open World",
+    description: "An open-world driving game — roam a custom city and earn cash. My take on GTA.",
+    image: "/games/road-rage.png",
   },
   {
     title: "Find the Cartoons",
     genre: "Adventure",
-    description:
-      "A classic find-the-character game — search a large, detailed map to track down hidden cartoons.",
+    description: "Hunt down hidden cartoons across a big, detailed map.",
     image: "/games/find-the-cartoons.png",
   },
 ];

@@ -13,7 +13,7 @@ export function Games() {
         <SectionHeading
           number="02"
           title="Games I've built"
-          description="Independently designed and built Roblox games across several genres — from SCP survival to open-world driving. Published projects reached over 5,000 total plays."
+          description="Roblox games I designed and built across several genres. Over 5,000 total plays."
         />
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

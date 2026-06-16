@@ -20,7 +20,7 @@ export const projects: Project[] = [
   {
     title: "Robotics Autonomous Systems",
     description:
-      "C++ robotics software for VEX competition, including autonomous routines, odometry, sensors, driver-control systems, and structured testing. The backbone of a Worlds-qualified competition robot.",
+      "C++ autonomy for VEX — routines, odometry, sensor feedback, and driver control. The backbone of a Worlds-qualified robot.",
     tags: ["C++", "VEX V5", "Odometry", "Sensors", "Autonomous"],
     status: "Competition",
     featured: true,
@@ -29,7 +29,7 @@ export const projects: Project[] = [
   {
     title: "3009H Heroic Robotics — VEX Worlds",
     description:
-      "Lead programmer, driver, and notebooker for 3009H Heroic Robotics. Built the autonomous and driver-control systems that helped qualify the team for the VEX Robotics World Championship, alongside a Design Award, a Skills Award, tournament championships, and multiple state qualifications.",
+      "Lead programmer, driver, and notebooker. Built the systems behind a Worlds qualification — plus a Design Award, a Skills Award, and tournament wins.",
     tags: ["VEX V5", "Lead Programmer", "Worlds", "Autonomous", "Notebook"],
     status: "Worlds Qualified",
     featured: true,
@@ -45,14 +45,14 @@ export const projects: Project[] = [
   {
     title: "CRM Importer / Automation Tooling",
     description:
-      "Worked on automation tooling for extracting, cleaning, and organizing client data from business workflows. Focused on practical software that saves time and reduces manual work.",
+      "Automation for extracting, cleaning, and organizing client data — practical software that cuts manual work.",
     tags: ["Python", "JavaScript", "Chrome Extension", "AI", "Automation"],
     status: "Work / Confidential",
   },
   {
     title: "MattOS",
     description:
-      "A local-first Obsidian-based idea and execution system for organizing thoughts, projects, tasks, prompts, and next actions.",
+      "A local-first Obsidian system that turns an idea dump into scored, organized notes and a weekly action queue.",
     tags: ["Python", "Obsidian", "Local AI", "Productivity", "Automation"],
     status: "In Progress",
   },
