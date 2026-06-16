@@ -1,6 +1,7 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
+import { MaskText } from "@/components/animations/mask-text";
 import { site } from "@/data/site";
 
 export function Contact() {
@@ -15,7 +16,7 @@ export function Contact() {
             06 <span className="text-muted-foreground">/ Contact</span>
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-            {site.contact.heading}
+            <MaskText text={site.contact.heading} />
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
             {site.contact.body}

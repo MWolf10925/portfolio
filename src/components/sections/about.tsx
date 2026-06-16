@@ -1,6 +1,8 @@
 import { GraduationCap, Target, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/reveal";
+import { MaskText } from "@/components/animations/mask-text";
+import { ScrollRevealText } from "@/components/animations/scroll-reveal-text";
 import { site } from "@/data/site";
 
 export function About() {
@@ -9,20 +11,19 @@ export function About() {
       <div className="container">
         {/* Heading + philosophy */}
         <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
-          <Reveal>
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
+            <Reveal>
               <span className="font-mono text-sm font-medium text-primary">03</span>
-              <span className="h-px w-8 bg-border" />
-              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                {site.about.heading}
-              </h2>
-            </div>
-          </Reveal>
-          <Reveal index={1}>
-            <p className="text-balance text-xl font-light leading-relaxed text-foreground/90">
-              {site.about.body}
-            </p>
-          </Reveal>
+            </Reveal>
+            <span className="h-px w-8 bg-border" />
+            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              <MaskText text={site.about.heading} />
+            </h2>
+          </div>
+          <ScrollRevealText
+            paragraph={site.about.body}
+            className="text-xl font-light leading-relaxed text-foreground/90"
+          />
         </div>
 
         {/* Building toward · Learning · Education */}
