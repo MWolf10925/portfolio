@@ -11,6 +11,9 @@ export interface Project {
   status?: string;
   href?: string;
   featured?: boolean;
+  /** Path under /public, e.g. "/projects/robotics.jpg". Shows a branded
+   *  placeholder frame until set. Featured projects render as big image rows. */
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -21,6 +24,7 @@ export const projects: Project[] = [
     tags: ["C++", "VEX V5", "Odometry", "Sensors", "Autonomous"],
     status: "Competition",
     featured: true,
+    image: "/projects/robotics.jpg",
   },
   {
     title: "Private Robotics PID Tuning Workflow",
@@ -28,6 +32,8 @@ export const projects: Project[] = [
       "Built a custom PID auto-tuning workflow that reduced tuning time from multiple days to roughly 1–5 minutes. Kept private to protect competitive advantage.",
     tags: ["C++", "PID Control", "Robotics", "Testing", "Automation"],
     status: "Private / Case Study",
+    featured: true,
+    image: "/projects/pid.jpg",
   },
   {
     title: "CRM Importer / Automation Tooling",
@@ -35,6 +41,8 @@ export const projects: Project[] = [
       "Worked on automation tooling for extracting, cleaning, and organizing client data from business workflows. Focused on practical software that saves time and reduces manual work.",
     tags: ["Python", "JavaScript", "Chrome Extension", "AI", "Automation"],
     status: "Work / Confidential",
+    featured: true,
+    image: "/projects/crm.jpg",
   },
   {
     title: "MattOS",

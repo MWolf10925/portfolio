@@ -8,32 +8,33 @@
 */
 @layer base {
   :root {
-    --background: 222 20% 7%;
-    --foreground: 210 20% 92%;
+    /* Black / white / orange — built around the MW logo. */
+    --background: 20 10% 5%;
+    --foreground: 30 12% 95%;
 
-    --card: 222 18% 9.5%;
-    --card-foreground: 210 20% 92%;
+    --card: 24 9% 8.5%;
+    --card-foreground: 30 12% 95%;
 
-    --muted: 220 14% 16%;
-    --muted-foreground: 215 14% 62%;
+    --muted: 24 8% 15%;
+    --muted-foreground: 28 8% 63%;
 
-    --primary: 212 56% 62%;
-    --primary-foreground: 222 30% 8%;
+    --primary: 20 90% 54%;
+    --primary-foreground: 24 40% 7%;
 
-    --secondary: 220 14% 14%;
-    --secondary-foreground: 210 20% 90%;
+    --secondary: 24 8% 13%;
+    --secondary-foreground: 30 12% 92%;
 
-    --accent: 215 28% 16%;
-    --accent-foreground: 210 20% 92%;
+    --accent: 22 35% 13%;
+    --accent-foreground: 30 12% 95%;
 
-    /* Rare robotics accent — use sparingly. */
-    --robotics: 24 88% 56%;
+    /* Brand orange (same as primary now). */
+    --robotics: 20 90% 54%;
 
-    --border: 220 14% 17%;
-    --input: 220 14% 17%;
-    --ring: 212 56% 62%;
+    --border: 26 10% 16%;
+    --input: 26 10% 16%;
+    --ring: 20 90% 54%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 }
 
@@ -56,8 +57,8 @@
     inset: 0;
     z-index: -1;
     background:
-      radial-gradient(60rem 40rem at 70% -10%, hsl(212 56% 62% / 0.08), transparent 60%),
-      radial-gradient(50rem 40rem at 10% 10%, hsl(220 40% 40% / 0.05), transparent 55%);
+      radial-gradient(60rem 40rem at 70% -10%, hsl(20 90% 54% / 0.08), transparent 60%),
+      radial-gradient(50rem 40rem at 10% 10%, hsl(30 80% 45% / 0.05), transparent 55%);
     pointer-events: none;
   }
 
@@ -118,11 +119,11 @@
 .text-shimmer {
   background-image: linear-gradient(
     110deg,
-    hsl(212 60% 72%) 0%,
-    hsl(190 75% 65%) 25%,
-    hsl(255 70% 75%) 50%,
-    hsl(190 75% 65%) 75%,
-    hsl(212 60% 72%) 100%
+    hsl(22 95% 58%) 0%,
+    hsl(38 95% 62%) 25%,
+    hsl(30 15% 96%) 50%,
+    hsl(38 95% 62%) 75%,
+    hsl(22 95% 58%) 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -152,19 +153,19 @@
 .aurora__blob--1 {
   width: 38rem; height: 38rem;
   top: -12rem; left: -6rem;
-  background: radial-gradient(circle, hsl(212 70% 55% / 0.5), transparent 65%);
+  background: radial-gradient(circle, hsl(20 92% 52% / 0.42), transparent 65%);
   animation: drift1 22s ease-in-out infinite alternate;
 }
 .aurora__blob--2 {
   width: 34rem; height: 34rem;
   top: -6rem; right: -8rem;
-  background: radial-gradient(circle, hsl(255 65% 60% / 0.4), transparent 65%);
+  background: radial-gradient(circle, hsl(36 95% 55% / 0.3), transparent 65%);
   animation: drift2 28s ease-in-out infinite alternate;
 }
 .aurora__blob--3 {
   width: 30rem; height: 30rem;
   top: 40%; left: 30%;
-  background: radial-gradient(circle, hsl(190 80% 55% / 0.28), transparent 65%);
+  background: radial-gradient(circle, hsl(12 90% 50% / 0.24), transparent 65%);
   animation: drift3 32s ease-in-out infinite alternate;
 }
 @keyframes drift1 { to { transform: translate(8rem, 6rem) scale(1.15); } }
@@ -175,7 +176,7 @@
 .spotlight {
   background: radial-gradient(
     32rem 32rem at var(--mx, 50%) var(--my, 0%),
-    hsl(212 70% 60% / 0.16),
+    hsl(22 90% 55% / 0.16),
     transparent 70%
   );
   transition: background 0.15s ease-out;
@@ -193,7 +194,7 @@
   border-radius: inherit;
   background: radial-gradient(
     14rem 14rem at var(--mx, 50%) var(--my, 50%),
-    hsl(205 95% 72% / 0.22),
+    hsl(28 95% 60% / 0.25),
     transparent 60%
   );
   opacity: 0;
@@ -218,8 +219,26 @@
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
+/* ── Logo self-draw (preloader) ───────────────────────────────────────────── */
+.logo-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: logo-draw 0.9s ease forwards;
+}
+.logo-stroke--delay { animation-delay: 0.22s; }
+.logo-slash {
+  opacity: 0;
+  animation: logo-fade 0.5s ease forwards;
+  animation-delay: 0.95s;
+}
+.logo-slash--delay { animation-delay: 1.08s; }
+@keyframes logo-draw { to { stroke-dashoffset: 0; } }
+@keyframes logo-fade { to { opacity: 1; } }
+
 @media (prefers-reduced-motion: reduce) {
   .text-shimmer { animation: none; }
   .aurora__blob { animation: none !important; }
   .marquee { animation: none; }
+  .logo-stroke { stroke-dashoffset: 0; animation: none; }
+  .logo-slash { opacity: 1; animation: none; }
 }

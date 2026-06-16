@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#13161c"/>
-  <text x="50%" y="50%" dy="0.34em" text-anchor="middle"
-        font-family="ui-sans-serif, system-ui, sans-serif" font-size="30" font-weight="700"
-        fill="#6ea8fe">MW</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 132">
+  <rect width="120" height="132" rx="18" fill="#0d0c0b"/>
+  <path d="M21 100 L13 24 L60 70 L107 24 L99 100" fill="none" stroke="#f4f1ee" stroke-width="12" stroke-linejoin="miter"/>
+  <path d="M21 60 L29 108 L60 64 L91 108 L99 60" fill="none" stroke="#f4f1ee" stroke-width="12" stroke-linejoin="miter"/>
+  <polygon points="30,74 52,74 44,90 22,90" fill="#f26a1b"/>
+  <polygon points="68,74 90,74 98,90 76,90" fill="#f26a1b"/>
 </svg>

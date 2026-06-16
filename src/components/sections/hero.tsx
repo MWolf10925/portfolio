@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/effects/magnetic";
+import { Logo } from "@/components/brand/logo";
 import { site } from "@/data/site";
 
 const container = {
@@ -54,6 +55,8 @@ export function Hero() {
     >
       <div ref={spotlightRef} className="spotlight pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute inset-0 -z-10 grid-texture opacity-60" />
+      {/* Faint brand watermark */}
+      <Logo className="pointer-events-none absolute -right-10 top-1/2 -z-10 hidden h-[34rem] w-[34rem] -translate-y-1/2 text-foreground opacity-[0.04] lg:block" />
 
       <motion.div
         className="container max-w-3xl"

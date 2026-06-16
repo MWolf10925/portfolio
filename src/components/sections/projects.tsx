@@ -1,9 +1,11 @@
 import { ArrowUpRight, Lock, Star } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SpotlightCard } from "@/components/effects/spotlight-card";
+import { ProjectMedia } from "@/components/sections/project-media";
 import { projects, type Project } from "@/data/projects";
 
 function isPrivateStatus(status?: string) {
@@ -11,21 +13,65 @@ function isPrivateStatus(status?: string) {
   return /private|confidential/i.test(status);
 }
 
-function ProjectCard({ project, featured }: { project: Project; featured?: boolean }) {
+/** Big alternating image/text row for a featured project. */
+function FeaturedRow({ project, flip }: { project: Project; flip: boolean }) {
+  const locked = isPrivateStatus(project.status);
+  return (
+    <Reveal className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+      <div className={flip ? "md:order-2" : ""}>
+        <SpotlightCard tilt={4}>
+          <ProjectMedia src={project.image} alt={project.title} />
+        </SpotlightCard>
+      </div>
+
+      <div className={flip ? "md:order-1" : ""}>
+        <div className="flex items-center gap-2">
+          <Star className="h-4 w-4 fill-primary text-primary" />
+          <span className="font-mono text-xs uppercase tracking-widest text-primary">
+            Featured
+          </span>
+        </div>
+        <h3 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
+          {project.title}
+        </h3>
+        {project.status && (
+          <div className="mt-3">
+            <Badge variant={locked ? "outline" : "primary"}>{project.status}</Badge>
+          </div>
+        )}
+        <p className="mt-4 max-w-md leading-relaxed text-muted-foreground">
+          {project.description}
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <Badge key={tag} variant="default">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+        {project.href && (
+          <div className="mt-6">
+            <Button asChild variant="outline" size="sm">
+              <a href={project.href} target="_blank" rel="noopener noreferrer">
+                View project
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        )}
+      </div>
+    </Reveal>
+  );
+}
+
+/** Compact spotlight card for secondary projects. */
+function ProjectCard({ project }: { project: Project }) {
   const locked = isPrivateStatus(project.status);
   const card = (
-    <Card
-      className={`group relative h-full overflow-hidden transition-colors duration-300 hover:border-primary/50 ${
-        featured ? "border-primary/30" : ""
-      }`}
-    >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    <Card className="group relative h-full overflow-hidden transition-colors duration-300 hover:border-primary/50">
       <CardHeader>
         <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-2">
-            {featured && <Star className="h-4 w-4 shrink-0 fill-primary text-primary" />}
-            <CardTitle className={featured ? "text-xl" : ""}>{project.title}</CardTitle>
-          </div>
+          <CardTitle>{project.title}</CardTitle>
           {project.href ? (
             <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
           ) : locked ? (
@@ -39,11 +85,7 @@ function ProjectCard({ project, featured }: { project: Project; featured?: boole
         )}
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-5">
-        <p
-          className={`leading-relaxed text-muted-foreground ${
-            featured ? "max-w-xl text-base" : "text-sm"
-          }`}
-        >
+        <p className="text-sm leading-relaxed text-muted-foreground">
           {project.description}
         </p>
         <div className="mt-auto flex flex-wrap gap-2">
@@ -58,19 +100,14 @@ function ProjectCard({ project, featured }: { project: Project; featured?: boole
   );
 
   const tilted = (
-    <SpotlightCard className="h-full" tilt={featured ? 3 : 6}>
+    <SpotlightCard className="h-full" tilt={6}>
       {card}
     </SpotlightCard>
   );
 
   if (project.href) {
     return (
-      <a
-        href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block h-full"
-      >
+      <a href={project.href} target="_blank" rel="noopener noreferrer" className="block h-full">
         {tilted}
       </a>
     );
@@ -91,21 +128,30 @@ export function Projects() {
           description="A mix of competition robotics, internship automation work, and independent builds. Some are kept private to protect competitive or confidential code."
         />
 
-        <div className="flex flex-col gap-5">
-          {featured.map((project) => (
-            <Reveal key={project.title}>
-              <ProjectCard project={project} featured />
-            </Reveal>
+        {/* Big alternating image rows */}
+        <div className="flex flex-col gap-20">
+          {featured.map((project, i) => (
+            <FeaturedRow key={project.title} project={project} flip={i % 2 === 1} />
           ))}
-
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {rest.map((project, i) => (
-              <Reveal key={project.title} index={i % 2}>
-                <ProjectCard project={project} />
-              </Reveal>
-            ))}
-          </div>
         </div>
+
+        {/* Secondary work */}
+        {rest.length > 0 && (
+          <>
+            <Reveal className="mb-8 mt-24">
+              <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
+                More work
+              </h3>
+            </Reveal>
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {rest.map((project, i) => (
+                <Reveal key={project.title} index={i % 2}>
+                  <ProjectCard project={project} />
+                </Reveal>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

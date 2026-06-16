@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/brand/logo";
 import { site } from "@/data/site";
 
 const nav = [
@@ -51,9 +52,16 @@ export function Navbar() {
       )}
     >
       <div className="container flex h-16 items-center justify-between">
-        <a href="#top" className="font-semibold tracking-tight">
-          {site.name}
-          <span className="text-primary">.</span>
+        <a
+          href="#top"
+          aria-label={`${site.name} — home`}
+          className="group flex items-center gap-2.5"
+        >
+          <Logo className="h-8 w-8 transition-transform duration-300 group-hover:scale-110" />
+          <span className="font-semibold tracking-tight">
+            {site.name}
+            <span className="text-primary">.</span>
+          </span>
         </a>
         <nav className="hidden gap-7 md:flex">
           {nav.map((item) => {
