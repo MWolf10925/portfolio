@@ -120,15 +120,6 @@ export function Hero() {
           {site.hero.subheadline}
         </motion.p>
 
-        <motion.p
-          variants={item}
-          className="mt-5 flex items-center gap-2 font-mono text-sm text-muted-foreground"
-        >
-          <span className="text-primary">currently</span>
-          <span className="text-primary">→</span>
-          <span className="text-foreground/80">{site.hero.currently}</span>
-        </motion.p>
-
         <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-3">
           <Magnetic>
             <Button asChild size="lg">

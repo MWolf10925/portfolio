@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Preloader } from "@/components/effects/preloader";
-import { ScrollBackground } from "@/components/effects/scroll-background";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { Hero } from "@/components/sections/hero";
 import { Stats } from "@/components/sections/stats";
@@ -16,7 +15,6 @@ export default function Home() {
   return (
     <>
       <Preloader />
-      <ScrollBackground />
       <ScrollProgress />
       <Navbar />
       <main>
