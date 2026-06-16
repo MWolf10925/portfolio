@@ -6,9 +6,9 @@ export const site = {
   name: "Matthew Wolf",
   role: "High school developer & VEX robotics lead programmer",
   location: "Union, KY",
-  // Core one-line positioning.
+  // Core one-line positioning (used for the SEO/social description).
   positioning:
-    "High school developer building robotics software, automation tools, and practical AI workflows.",
+    "High school developer building robotics, automation, and AI tools.",
 
   // Public contact — email only (phone intentionally kept private).
   email: "mattmtw09@gmail.com",
