@@ -113,3 +113,113 @@
 @media (prefers-reduced-motion: reduce) {
   .status-dot::after { animation: none; }
 }
+
+/* ── Animated gradient headline (shimmer sweep) ───────────────────────────── */
+.text-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    hsl(212 60% 72%) 0%,
+    hsl(190 75% 65%) 25%,
+    hsl(255 70% 75%) 50%,
+    hsl(190 75% 65%) 75%,
+    hsl(212 60% 72%) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+
+/* ── Aurora drifting blobs ────────────────────────────────────────────────── */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora__blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.aurora__blob--1 {
+  width: 38rem; height: 38rem;
+  top: -12rem; left: -6rem;
+  background: radial-gradient(circle, hsl(212 70% 55% / 0.5), transparent 65%);
+  animation: drift1 22s ease-in-out infinite alternate;
+}
+.aurora__blob--2 {
+  width: 34rem; height: 34rem;
+  top: -6rem; right: -8rem;
+  background: radial-gradient(circle, hsl(255 65% 60% / 0.4), transparent 65%);
+  animation: drift2 28s ease-in-out infinite alternate;
+}
+.aurora__blob--3 {
+  width: 30rem; height: 30rem;
+  top: 40%; left: 30%;
+  background: radial-gradient(circle, hsl(190 80% 55% / 0.28), transparent 65%);
+  animation: drift3 32s ease-in-out infinite alternate;
+}
+@keyframes drift1 { to { transform: translate(8rem, 6rem) scale(1.15); } }
+@keyframes drift2 { to { transform: translate(-7rem, 9rem) scale(1.1); } }
+@keyframes drift3 { to { transform: translate(-6rem, -8rem) scale(1.2); } }
+
+/* ── Cursor spotlight (hero) ──────────────────────────────────────────────── */
+.spotlight {
+  background: radial-gradient(
+    32rem 32rem at var(--mx, 50%) var(--my, 0%),
+    hsl(212 70% 60% / 0.16),
+    transparent 70%
+  );
+  transition: background 0.15s ease-out;
+}
+
+/* ── Spotlight card glow (light sheen following cursor over the card) ─────── */
+.glow-card {
+  position: relative;
+  border-radius: var(--radius);
+}
+.glow-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    14rem 14rem at var(--mx, 50%) var(--my, 50%),
+    hsl(205 95% 72% / 0.22),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.glow-card:hover::after { opacity: 1; }
+
+/* ── Infinite marquee ─────────────────────────────────────────────────────── */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 36s) linear infinite;
+}
+.marquee:hover { animation-play-state: paused; }
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-shimmer { animation: none; }
+  .aurora__blob { animation: none !important; }
+  .marquee { animation: none; }
+}

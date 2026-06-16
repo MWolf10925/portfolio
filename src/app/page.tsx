@@ -1,5 +1,7 @@
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { AuroraBackground } from "@/components/effects/aurora-background";
+import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { Hero } from "@/components/sections/hero";
 import { Stats } from "@/components/sections/stats";
 import { Projects } from "@/components/sections/projects";
@@ -11,6 +13,8 @@ import { Contact } from "@/components/sections/contact";
 export default function Home() {
   return (
     <>
+      <AuroraBackground />
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />

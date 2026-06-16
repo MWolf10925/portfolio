@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
+import { SpotlightCard } from "@/components/effects/spotlight-card";
 import { projects, type Project } from "@/data/projects";
 
 function isPrivateStatus(status?: string) {
@@ -14,7 +15,7 @@ function ProjectCard({ project, featured }: { project: Project; featured?: boole
   const locked = isPrivateStatus(project.status);
   const card = (
     <Card
-      className={`group relative h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 ${
+      className={`group relative h-full overflow-hidden transition-colors duration-300 hover:border-primary/50 ${
         featured ? "border-primary/30" : ""
       }`}
     >
@@ -56,6 +57,12 @@ function ProjectCard({ project, featured }: { project: Project; featured?: boole
     </Card>
   );
 
+  const tilted = (
+    <SpotlightCard className="h-full" tilt={featured ? 3 : 6}>
+      {card}
+    </SpotlightCard>
+  );
+
   if (project.href) {
     return (
       <a
@@ -64,11 +71,11 @@ function ProjectCard({ project, featured }: { project: Project; featured?: boole
         rel="noopener noreferrer"
         className="block h-full"
       >
-        {card}
+        {tilted}
       </a>
     );
   }
-  return card;
+  return tilted;
 }
 
 export function Projects() {

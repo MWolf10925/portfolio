@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/effects/magnetic";
 import { site } from "@/data/site";
 
 const container = {
@@ -19,9 +21,38 @@ const item = {
   },
 };
 
+// Words that get the animated gradient treatment in the headline.
+const GRADIENT_WORDS = new Set(["robotics", "automation", "AI"]);
+
+const wordVariant = {
+  hidden: { opacity: 0, y: "0.5em" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] },
+  },
+};
+
 export function Hero() {
+  const spotlightRef = useRef<HTMLDivElement>(null);
+
+  function handleMove(e: React.MouseEvent<HTMLElement>) {
+    const el = spotlightRef.current;
+    if (!el) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  }
+
+  const words = site.hero.headline.split(" ");
+
   return (
-    <section id="top" className="relative overflow-hidden pt-36 pb-24 sm:pt-44">
+    <section
+      id="top"
+      onMouseMove={handleMove}
+      className="relative overflow-hidden pt-36 pb-24 sm:pt-44"
+    >
+      <div ref={spotlightRef} className="spotlight pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute inset-0 -z-10 grid-texture opacity-60" />
 
       <motion.div
@@ -41,11 +72,27 @@ export function Hero() {
           </span>
         </motion.div>
 
+        {/* Word-by-word reveal, with key words in an animated gradient. */}
         <motion.h1
-          variants={item}
+          variants={{ visible: { transition: { staggerChildren: 0.045, delayChildren: 0.15 } } }}
+          initial="hidden"
+          animate="visible"
           className="mt-6 text-balance text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl"
         >
-          {site.hero.headline}
+          {words.map((word, i) => {
+            const clean = word.replace(/[^a-zA-Z]/g, "");
+            const isGradient = GRADIENT_WORDS.has(clean);
+            return (
+              <span key={i} className="inline-block overflow-hidden align-bottom">
+                <motion.span
+                  variants={wordVariant}
+                  className={`mr-[0.25em] inline-block ${isGradient ? "text-shimmer" : ""}`}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            );
+          })}
         </motion.h1>
 
         <motion.p
@@ -64,13 +111,15 @@ export function Hero() {
           <span className="text-foreground/80">{site.hero.currently}</span>
         </motion.p>
 
-        <motion.div variants={item} className="mt-9 flex flex-wrap gap-3">
-          <Button asChild size="lg">
-            <a href="#projects">
-              View Projects
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </Button>
+        <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-3">
+          <Magnetic>
+            <Button asChild size="lg">
+              <a href="#projects">
+                View Projects
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </Button>
+          </Magnetic>
           <Button asChild size="lg" variant="outline">
             <a href="#contact">
               <Mail className="h-4 w-4" />
