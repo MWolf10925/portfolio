@@ -16,7 +16,7 @@ export const site = {
   // Replace the # placeholders with your real profile URLs.
   links: {
     github: "https://github.com/MWolf10925",
-    linkedin: "#", // TODO: add LinkedIn URL
+    linkedin: "https://www.linkedin.com/in/matt-wolf-478972401",
   },
 
   hero: {
