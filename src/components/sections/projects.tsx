@@ -6,6 +6,7 @@ import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SpotlightCard } from "@/components/effects/spotlight-card";
 import { ProjectMedia } from "@/components/sections/project-media";
+import { CodeShowcase } from "@/components/sections/code-showcase";
 import { projects, type Project } from "@/data/projects";
 
 function isPrivateStatus(status?: string) {
@@ -134,6 +135,9 @@ export function Projects() {
             <FeaturedRow key={project.title} project={project} flip={i % 2 === 1} />
           ))}
         </div>
+
+        {/* Real code excerpt */}
+        <CodeShowcase />
 
         {/* Secondary work */}
         {rest.length > 0 && (

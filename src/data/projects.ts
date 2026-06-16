@@ -27,13 +27,20 @@ export const projects: Project[] = [
     image: "/projects/robotics.jpg",
   },
   {
+    title: "3009H Heroic Robotics — VEX Worlds",
+    description:
+      "Lead programmer, driver, and notebooker for 3009H Heroic Robotics. Built the autonomous and driver-control systems that helped qualify the team for the VEX Robotics World Championship, alongside a Design Award, a Skills Award, tournament championships, and multiple state qualifications.",
+    tags: ["VEX V5", "Lead Programmer", "Worlds", "Autonomous", "Notebook"],
+    status: "Worlds Qualified",
+    featured: true,
+    image: "/projects/competition.jpg",
+  },
+  {
     title: "Private Robotics PID Tuning Workflow",
     description:
       "Built a custom PID auto-tuning workflow that reduced tuning time from multiple days to roughly 1–5 minutes. Kept private to protect competitive advantage.",
     tags: ["C++", "PID Control", "Robotics", "Testing", "Automation"],
     status: "Private / Case Study",
-    featured: true,
-    image: "/projects/pid.jpg",
   },
   {
     title: "CRM Importer / Automation Tooling",
@@ -41,8 +48,6 @@ export const projects: Project[] = [
       "Worked on automation tooling for extracting, cleaning, and organizing client data from business workflows. Focused on practical software that saves time and reduces manual work.",
     tags: ["Python", "JavaScript", "Chrome Extension", "AI", "Automation"],
     status: "Work / Confidential",
-    featured: true,
-    image: "/projects/crm.jpg",
   },
   {
     title: "MattOS",

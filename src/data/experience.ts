@@ -13,7 +13,7 @@ export interface Experience {
 export const experience: Experience[] = [
   {
     role: "Lead Programmer / Driver / Notebooker",
-    org: "Heroic Robotics Team",
+    org: "3009H Heroic Robotics (VEX V5)",
     period: "May 2024 – Present",
     bullets: [
       "Develop autonomous and driver-control systems in C++ for competitive VEX robotics using odometry, sensors, and structured testing.",
