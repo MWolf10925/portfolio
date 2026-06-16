@@ -56,11 +56,4 @@ export const projects: Project[] = [
     tags: ["Python", "Obsidian", "Local AI", "Productivity", "Automation"],
     status: "In Progress",
   },
-  {
-    title: "Independent Game & Web Projects",
-    description:
-      "Built independent game and web projects using Lua, Python, JavaScript, HTML, and CSS, with published projects reaching over 5,000 total plays.",
-    tags: ["Lua", "JavaScript", "HTML", "CSS", "UI"],
-    status: "Built",
-  },
 ];

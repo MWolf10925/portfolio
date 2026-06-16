@@ -8,12 +8,22 @@ import { Logo } from "@/components/brand/logo";
  * Shows the project photo if it loads; otherwise a branded placeholder frame.
  * Drop real images in /public/projects/ and they appear automatically.
  */
-export function ProjectMedia({ src, alt }: { src?: string; alt: string }) {
+export function ProjectMedia({
+  src,
+  alt,
+  aspect = "aspect-[16/10]",
+}: {
+  src?: string;
+  alt: string;
+  aspect?: string;
+}) {
   const [errored, setErrored] = useState(false);
   const showImage = Boolean(src) && !errored;
 
   return (
-    <div className="group relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-border bg-card">
+    <div
+      className={`group relative ${aspect} w-full overflow-hidden rounded-lg border border-border bg-card`}
+    >
       {showImage ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img

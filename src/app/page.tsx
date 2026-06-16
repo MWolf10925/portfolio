@@ -6,6 +6,7 @@ import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { Hero } from "@/components/sections/hero";
 import { Stats } from "@/components/sections/stats";
 import { Projects } from "@/components/sections/projects";
+import { Games } from "@/components/sections/games";
 import { About } from "@/components/sections/about";
 import { Skills } from "@/components/sections/skills";
 import { Experience } from "@/components/sections/experience";
@@ -22,6 +23,7 @@ export default function Home() {
         <Hero />
         <Stats />
         <Projects />
+        <Games />
         <About />
         <Skills />
         <Experience />

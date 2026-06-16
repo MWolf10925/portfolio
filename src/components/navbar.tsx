@@ -7,10 +7,11 @@ import { site } from "@/data/site";
 
 const nav = [
   { num: "01", label: "Projects", href: "#projects" },
-  { num: "02", label: "About", href: "#about" },
-  { num: "03", label: "Skills", href: "#skills" },
-  { num: "04", label: "Experience", href: "#experience" },
-  { num: "05", label: "Contact", href: "#contact" },
+  { num: "02", label: "Games", href: "#games" },
+  { num: "03", label: "About", href: "#about" },
+  { num: "04", label: "Skills", href: "#skills" },
+  { num: "05", label: "Experience", href: "#experience" },
+  { num: "06", label: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {

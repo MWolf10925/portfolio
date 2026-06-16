@@ -9,7 +9,7 @@ export function Experience() {
       className="scroll-mt-20 border-y border-border bg-card/30 py-24"
     >
       <div className="container">
-        <SectionHeading number="04" title="Experience" />
+        <SectionHeading number="05" title="Experience" />
 
         <div className="relative">
           {/* vertical line */}

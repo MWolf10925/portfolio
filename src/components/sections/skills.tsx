@@ -27,7 +27,7 @@ export function Skills() {
   return (
     <section id="skills" className="scroll-mt-20 py-24">
       <div className="container">
-        <SectionHeading number="03" title="Skills" />
+        <SectionHeading number="04" title="Skills" />
       </div>
 
       {/* Full-bleed infinite marquee */}

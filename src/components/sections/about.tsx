@@ -9,7 +9,7 @@ export function About() {
         <div>
           <Reveal>
             <div className="flex items-center gap-3">
-              <span className="font-mono text-sm font-medium text-primary">02</span>
+              <span className="font-mono text-sm font-medium text-primary">03</span>
               <span className="h-px w-8 bg-border" />
               <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
                 {site.about.heading}
