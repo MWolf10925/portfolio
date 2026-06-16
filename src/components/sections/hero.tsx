@@ -64,11 +64,7 @@ export function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={item} className="flex flex-wrap items-center gap-3">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 font-mono text-xs text-foreground/90">
-            <span className="status-dot" />
-            {site.hero.badge}
-          </span>
+        <motion.div variants={item}>
           <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
             <MapPin className="h-3.5 w-3.5 text-primary" />
             {site.location}

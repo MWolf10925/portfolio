@@ -20,12 +20,10 @@ export const site = {
   },
 
   hero: {
-    badge: "Open to internships & project work",
-    headline: "I build robotics software, automation tools, and practical AI workflows.",
-    subheadline:
-      "I'm Matthew Wolf, a high school developer and VEX robotics lead programmer focused on C++, automation, web tools, and real-world problem solving.",
+    headline: "I build robotics, automation, and AI tools.",
+    subheadline: "High school developer and VEX robotics lead programmer.",
     // Short mono "currently" line under the hero.
-    currently: "Product Automation Eng. intern @ Instant Quote · competitive VEX C++",
+    currently: "Automation intern @ Instant Quote · competitive VEX C++",
   },
 
   education: [
