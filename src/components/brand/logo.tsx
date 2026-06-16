@@ -23,34 +23,36 @@ export function Logo({ className, animated = false }: LogoProps) {
       aria-label="Matthew Wolf monogram"
       fill="none"
     >
-      {/* M — peaks up (top half) */}
+      {/* M — wide peaks up, deep center valley (top half) */}
       <path
-        d="M21 100 L13 24 L60 70 L107 24 L99 100"
+        d="M36 76 L30 16 L60 56 L90 16 L84 76"
         stroke="currentColor"
-        strokeWidth="12"
+        strokeWidth="13"
         strokeLinejoin="miter"
         strokeLinecap="butt"
+        strokeMiterlimit={9}
         pathLength={1}
         className={animated ? "logo-stroke" : undefined}
       />
-      {/* W — valleys down (bottom half), interlocks at center */}
+      {/* W — splayed tips down, center peak up; interlocks at center */}
       <path
-        d="M21 60 L29 108 L60 64 L91 108 L99 60"
+        d="M36 56 L30 116 L60 76 L90 116 L84 56"
         stroke="currentColor"
-        strokeWidth="12"
+        strokeWidth="13"
         strokeLinejoin="miter"
         strokeLinecap="butt"
+        strokeMiterlimit={9}
         pathLength={1}
         className={animated ? "logo-stroke logo-stroke--delay" : undefined}
       />
-      {/* Orange diagonal accents */}
+      {/* Orange slashes angled into the central X */}
       <polygon
-        points="30,74 52,74 44,90 22,90"
+        points="32,60 51,69 51,81 32,72"
         fill="hsl(var(--primary))"
         className={animated ? "logo-slash" : undefined}
       />
       <polygon
-        points="68,74 90,74 98,90 76,90"
+        points="88,60 69,69 69,81 88,72"
         fill="hsl(var(--primary))"
         className={animated ? "logo-slash logo-slash--delay" : undefined}
       />
