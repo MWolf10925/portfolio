@@ -20,16 +20,16 @@ export const projects: Project[] = [
   {
     title: "Robotics Autonomous Systems",
     description:
-      "C++ autonomy for VEX — routines, odometry, sensor feedback, and driver control. The backbone of a Worlds-qualified robot.",
+      "C++ autonomy for VEX: routines, odometry, sensor feedback, and driver control. The backbone of a Worlds-qualified robot.",
     tags: ["C++", "VEX V5", "Odometry", "Sensors", "Autonomous"],
     status: "Competition",
     featured: true,
     image: "/projects/robotics.jpg",
   },
   {
-    title: "3009H Heroic Robotics — VEX Worlds",
+    title: "3009H Heroic Robotics · VEX Worlds",
     description:
-      "Lead programmer, driver, and notebooker. Built the systems behind a Worlds qualification — plus a Design Award, a Skills Award, and tournament wins.",
+      "Lead programmer, driver, and notebooker. Built the systems behind a Worlds qualification, plus a Design Award, a Skills Award, and tournament wins.",
     tags: ["VEX V5", "Lead Programmer", "Worlds", "Autonomous", "Notebook"],
     status: "Worlds Qualified",
     featured: true,
@@ -45,7 +45,7 @@ export const projects: Project[] = [
   {
     title: "CRM Importer / Automation Tooling",
     description:
-      "Automation for extracting, cleaning, and organizing client data — practical software that cuts manual work.",
+      "Automation for extracting, cleaning, and organizing client data. Practical software that cuts manual work.",
     tags: ["Python", "JavaScript", "Chrome Extension", "AI", "Automation"],
     status: "Work / Confidential",
   },

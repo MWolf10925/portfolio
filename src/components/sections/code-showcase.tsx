@@ -4,7 +4,7 @@ const FILENAME = "localization.cpp";
 
 // A real, lightly-trimmed excerpt from the 3009H competition codebase.
 const CODE: string[] = [
-  "// Monte Carlo Localization — score every particle by how well its",
+  "// Monte Carlo Localization: score every particle by how well its",
   "// predicted distance-sensor readings match the real sensors.",
   "double gaussianProbability(double error, double stdDev) {",
   "    const double normalized = error / stdDev;",
@@ -33,7 +33,7 @@ export function CodeShowcase() {
           Under the hood
         </h3>
         <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-          A real excerpt from the 3009H competition codebase — the Monte Carlo
+          A real excerpt from the 3009H competition codebase: the Monte Carlo
           localization that estimates the robot&rsquo;s position on the field
           from distance sensors and odometry.
         </p>

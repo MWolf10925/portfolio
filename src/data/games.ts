@@ -16,7 +16,7 @@ export const games: Game[] = [
     title: "Dark Hours",
     genre: "SCP Survival",
     description:
-      "Scavenge an IKEA-like map by day for items and weapons — then survive the monsters that come out at night.",
+      "Scavenge an IKEA-like map by day for items and weapons, then survive the monsters that come out at night.",
     image: "/games/dark-hours.png",
     href: "https://www.roblox.com/games/18579942960/Dark-Hours",
   },
@@ -31,7 +31,7 @@ export const games: Game[] = [
   {
     title: "Road Rage",
     genre: "Open World",
-    description: "An open-world driving game — roam a custom city and earn cash. My take on GTA.",
+    description: "An open-world driving game: roam a custom city and earn cash. My take on GTA.",
     image: "/games/road-rage.png",
   },
   {

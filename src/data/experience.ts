@@ -47,7 +47,7 @@ export const experience: Experience[] = [
     org: "Self-employed",
     period: "Jun 2024 – Present",
     bullets: [
-      "Run independent yard-work jobs — scheduling, client communication, and consistent follow-through on physically demanding work.",
+      "Run independent yard-work jobs: scheduling, client communication, and consistent follow-through on physically demanding work.",
     ],
   },
   {

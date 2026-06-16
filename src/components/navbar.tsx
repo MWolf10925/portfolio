@@ -55,7 +55,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <a
           href="#top"
-          aria-label={`${site.name} — home`}
+          aria-label={`${site.name}, home`}
           className="group flex items-center gap-2.5"
         >
           <Logo className="h-8 w-8 transition-transform duration-300 group-hover:scale-110" />

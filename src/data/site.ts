@@ -43,11 +43,11 @@ export const site = {
 
   about: {
     heading: "How I build",
-    body: "I'm not trying to look like a finished expert. I'm building proof through real projects — robotics systems, automation tools, web experiments, and AI workflows that solve actual problems. My focus is simple: learn fast, build useful things, test them, and keep improving.",
+    body: "I'm not trying to look like a finished expert. I'm building proof through real projects: robotics systems, automation tools, web experiments, and AI workflows that solve actual problems. My focus is simple. Learn fast, build useful things, test them, and keep improving.",
     // What I'm working toward (professional framing).
     buildingToward: [
       "Tools and systems that are actually useful to real people.",
-      "Independence — never boxed into a single path.",
+      "Independence, never boxed into a single path.",
       "Respect earned through skill and results, not attention.",
       "Always improving. Always building.",
     ],
