@@ -30,13 +30,13 @@ export const site = {
 
   education: [
     {
-      school: "Northern Kentucky University",
-      detail: "Early College — college coursework",
-      period: "Current",
+      school: "Randall K. Cooper High School",
+      detail: "Early College Program · GPA 4.0 (unweighted)",
+      period: "2023 – 2027 (expected)",
     },
     {
-      school: "Randall K. Cooper High School",
-      detail: "High school diploma track",
+      school: "Northern Kentucky University",
+      detail: "Early-college / dual-enrollment coursework",
       period: "Current",
     },
   ],
@@ -44,6 +44,24 @@ export const site = {
   about: {
     heading: "How I build",
     body: "I'm not trying to look like a finished expert. I'm building proof through real projects — robotics systems, automation tools, web experiments, and AI workflows that solve actual problems. My focus is simple: learn fast, build useful things, test them, and keep improving.",
+    // What I'm working toward (professional framing).
+    buildingToward: [
+      "Building tools, systems, and businesses that are genuinely useful and help real people.",
+      "Independence — the freedom to choose what I work on and never be boxed into one path.",
+      "Respect earned through discipline, skill, and results — not attention.",
+      "Always on an incline: stronger, smarter, and more capable than I was last year.",
+      "Building something my family is proud of, and that younger people can look up to.",
+    ],
+    // Skills I'm actively leveling up.
+    learning: [
+      "A personal \"Jarvis\" AI assistant",
+      "AI-driven web UI",
+      "Leading teams",
+      "Communication & psychology",
+      "Calm under pressure",
+      "Building in public",
+      "Boxing & calisthenics",
+    ],
   },
 
   contact: {

@@ -18,14 +18,14 @@ export const games: Game[] = [
     genre: "SCP Survival",
     description:
       "An SCP-style survival game. Scavenge an IKEA-like map by day for items, weapons, and large objects across different plots of land — then defend yourself when night falls and the monsters come out.",
-    image: "/games/dark-hours.jpg",
+    image: "/games/dark-hours.png",
   },
   {
     title: "Road Rage",
     genre: "Open World",
     description:
       "An open-world driving game in the spirit of GTA. Roam a custom city map and earn money — my own take on the genre, built from the ground up.",
-    image: "/games/road-rage.jpg",
+    image: "/games/road-rage.png",
   },
   {
     title: "Tower Offense",
@@ -39,6 +39,6 @@ export const games: Game[] = [
     genre: "Adventure",
     description:
       "A classic find-the-character game — search a large, detailed map to track down hidden cartoons.",
-    image: "/games/find-the-cartoons.jpg",
+    image: "/games/find-the-cartoons.png",
   },
 ];

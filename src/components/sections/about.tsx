@@ -1,12 +1,14 @@
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Target, Sparkles } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/reveal";
 import { site } from "@/data/site";
 
 export function About() {
   return (
     <section id="about" className="scroll-mt-20 border-y border-border bg-card/30 py-24">
-      <div className="container grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
-        <div>
+      <div className="container">
+        {/* Heading + philosophy */}
+        <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
           <Reveal>
             <div className="flex items-center gap-3">
               <span className="font-mono text-sm font-medium text-primary">03</span>
@@ -16,10 +18,47 @@ export function About() {
               </h2>
             </div>
           </Reveal>
+          <Reveal index={1}>
+            <p className="text-balance text-xl font-light leading-relaxed text-foreground/90">
+              {site.about.body}
+            </p>
+          </Reveal>
+        </div>
 
-          <Reveal index={1} className="mt-8">
+        {/* Building toward · Learning · Education */}
+        <div className="mt-16 grid gap-10 md:grid-cols-3">
+          <Reveal>
             <h3 className="mb-4 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
-              <GraduationCap className="h-4 w-4" />
+              <Target className="h-4 w-4 text-primary" />
+              Building toward
+            </h3>
+            <ul className="space-y-3">
+              {site.about.buildingToward.map((item) => (
+                <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal index={1}>
+            <h3 className="mb-4 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              <Sparkles className="h-4 w-4 text-primary" />
+              Currently learning
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {site.about.learning.map((item) => (
+                <Badge key={item} variant="outline">
+                  {item}
+                </Badge>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal index={2}>
+            <h3 className="mb-4 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              <GraduationCap className="h-4 w-4 text-primary" />
               Education
             </h3>
             <ul className="space-y-4">
@@ -33,12 +72,6 @@ export function About() {
             </ul>
           </Reveal>
         </div>
-
-        <Reveal index={1}>
-          <p className="text-balance text-xl font-light leading-relaxed text-foreground/90">
-            {site.about.body}
-          </p>
-        </Reveal>
       </div>
     </section>
   );

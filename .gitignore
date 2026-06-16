@@ -31,3 +31,7 @@ next-env.d.ts
 # editor
 .vscode/
 .idea/
+
+# image staging / drop-zone (only curated copies in projects/ & games/ are used)
+/public/Images/
+/public/logo.png.png

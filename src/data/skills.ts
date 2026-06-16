@@ -23,6 +23,7 @@ export const skillGroups: SkillGroup[] = [
       "Driver control",
       "Testing",
       "Notebooking",
+      "Fusion 360 (CAD)",
     ],
   },
   {
