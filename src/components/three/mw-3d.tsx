@@ -133,10 +133,10 @@ function MWModel() {
     <Float speed={1.3} rotationIntensity={0.22} floatIntensity={0.65}>
       <group ref={ref}>
         <mesh geometry={geom.m}>
-          <meshStandardMaterial color="#f4f2ee" metalness={0.45} roughness={0.32} envMapIntensity={0.5} />
+          <meshStandardMaterial color="#f4f2ee" metalness={0.6} roughness={0.16} envMapIntensity={0.85} />
         </mesh>
         <mesh geometry={geom.w}>
-          <meshStandardMaterial color="#f4f2ee" metalness={0.45} roughness={0.32} envMapIntensity={0.5} />
+          <meshStandardMaterial color="#f4f2ee" metalness={0.6} roughness={0.16} envMapIntensity={0.85} />
         </mesh>
         {geom.slashes.map((g, i) => (
           <mesh key={i} geometry={g} position={[0, 0, 0.06]}>
@@ -169,6 +169,8 @@ export default function MW3D() {
       {/* Mostly-white studio with just a hint of warm/cool in the reflections. */}
       <Environment resolution={256} frames={1}>
         <color attach="background" args={["#0a0a0a"]} />
+        {/* small hot panel = sharp glare highlight */}
+        <Lightformer color="#ffffff" intensity={7} position={[-1.4, 2, 5]} scale={[1.6, 1.6, 1]} />
         <Lightformer color="#ffffff" intensity={3} position={[-2, 2.5, 4]} scale={[5, 5, 1]} />
         <Lightformer color="#ffffff" intensity={2.2} position={[3, 1.5, 4]} scale={[5, 5, 1]} />
         <Lightformer color="#ffd9b0" intensity={1} position={[2, -2, 3]} scale={[4, 4, 1]} />

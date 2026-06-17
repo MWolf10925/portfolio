@@ -41,21 +41,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
           .sort((a, b) => a - b);
         if (tops.length < 2) return;
 
-        const heroTop = tops[0];
-        const firstContent = tops[1];
-
-        // Leaving the hero downward -> commit to the first content section.
-        if (dir > 0 && y > vh * 0.06 && y < firstContent - 8) {
-          lenis.scrollTo(firstContent, { duration: 0.8 });
-          return;
-        }
-        // Scrolling back up into the hero -> commit to the top.
-        if (dir < 0 && y < firstContent - 8 && y > 8) {
-          lenis.scrollTo(heroTop, { duration: 0.8 });
-          return;
-        }
-
-        // Proximity snap for the rest, never against the scroll direction.
+        // Snap to the nearest section, never against the scroll direction.
         let nearest = tops[0];
         for (const t of tops) if (Math.abs(t - y) < Math.abs(nearest - y)) nearest = t;
         let target = nearest;
@@ -66,9 +52,10 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
           const behind = [...tops].reverse().find((t) => t < y - 4);
           if (behind != null) target = behind;
         }
+        // Only when "close enough" (within ~40% of the viewport).
         const dist = Math.abs(target - y);
-        if (dist > 6 && dist < vh * 0.3) {
-          lenis.scrollTo(target, { duration: 0.7 });
+        if (dist > 6 && dist < vh * 0.4) {
+          lenis.scrollTo(target, { duration: 0.8 });
         }
       }, 140);
     }
