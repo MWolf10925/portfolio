@@ -165,7 +165,7 @@ export default function MW3D() {
       <ambientLight intensity={0.75} />
       <directionalLight position={[4, 5, 6]} intensity={1.6} />
       <pointLight position={[-4, -2, 3]} color="#F26A1B" intensity={1.5} />
-      <group position={[2.45, 0.35, 0]} scale={0.52}>
+      <group position={[2.45, 0, 0]} scale={0.5}>
         <MWModel />
       </group>
     </Canvas>

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Mail, MapPin } from "lucide-react";
+import { ArrowRight, ChevronDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/effects/magnetic";
 import { Logo } from "@/components/brand/logo";
@@ -63,10 +63,9 @@ export function Hero() {
     <section
       id="top"
       onMouseMove={handleMove}
-      className="relative overflow-hidden pt-36 pb-24 sm:pt-44"
+      className="relative flex min-h-screen items-center overflow-hidden bg-[hsl(20_14%_4%)]"
     >
       <div ref={spotlightRef} className="spotlight pointer-events-none absolute inset-0 -z-10" />
-      <div className="pointer-events-none absolute inset-0 -z-10 grid-texture opacity-60" />
 
       {/* 3D MW monogram (desktop) — or a faint flat watermark (tablet) */}
       {show3D ? (
@@ -83,19 +82,12 @@ export function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={item}>
-          <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-            <MapPin className="h-3.5 w-3.5 text-primary" />
-            {site.location}
-          </span>
-        </motion.div>
-
         {/* Word-by-word reveal, with key words in an animated gradient. */}
         <motion.h1
-          variants={{ visible: { transition: { staggerChildren: 0.045, delayChildren: 0.15 } } }}
+          variants={{ visible: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } } }}
           initial="hidden"
           animate="visible"
-          className="mt-6 text-balance text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl"
+          className="text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
         >
           {words.map((word, i) => {
             const clean = word.replace(/[^a-zA-Z]/g, "");
@@ -115,7 +107,7 @@ export function Hero() {
 
         <motion.p
           variants={item}
-          className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground"
+          className="mt-6 max-w-xl text-lg text-muted-foreground"
         >
           {site.hero.subheadline}
         </motion.p>
@@ -132,17 +124,31 @@ export function Hero() {
           <Button asChild size="lg" variant="outline">
             <a href="#contact">
               <Mail className="h-4 w-4" />
-              Contact Me
-            </a>
-          </Button>
-          <Button asChild size="lg" variant="ghost">
-            <a href={site.links.github} target="_blank" rel="noopener noreferrer">
-              <Github className="h-4 w-4" />
-              GitHub
+              Contact
             </a>
           </Button>
         </motion.div>
       </motion.div>
+
+      {/* Scroll cue */}
+      <motion.a
+        href="#projects"
+        aria-label="Scroll down"
+        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.3, duration: 0.6 }}
+      >
+        <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+          Scroll
+        </span>
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="h-4 w-4 text-primary" />
+        </motion.span>
+      </motion.a>
     </section>
   );
 }
