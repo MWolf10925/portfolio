@@ -67,16 +67,6 @@ export function Hero() {
     >
       <div ref={spotlightRef} className="spotlight pointer-events-none absolute inset-0 -z-10" />
 
-      {/* Warm glow bleeding off the 3D object (desktop) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-[2%] top-1/2 -z-[5] hidden h-[42rem] w-[42rem] -translate-y-1/2 rounded-full blur-2xl lg:block"
-        style={{
-          background:
-            "radial-gradient(circle, hsl(18 95% 50% / 0.18), hsl(0 90% 45% / 0.08) 40%, transparent 65%)",
-        }}
-      />
-
       {/* 3D MW monogram (desktop) — or a faint flat watermark (tablet) */}
       {show3D ? (
         <div className="pointer-events-none absolute inset-0 z-0">

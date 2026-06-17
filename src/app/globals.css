@@ -47,6 +47,15 @@
   html.has-custom-cursor * {
     cursor: none !important;
   }
+
+  /* Hide the native scrollbar (Lenis drives scrolling). */
+  html {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* old Edge */
+  }
+  html::-webkit-scrollbar {
+    display: none; /* Chrome / Safari */
+  }
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;

@@ -11,15 +11,9 @@ export function About() {
       <div className="container">
         {/* Heading + philosophy */}
         <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
-          <div className="flex items-center gap-3">
-            <Reveal>
-              <span className="font-mono text-sm font-medium text-primary">03</span>
-            </Reveal>
-            <span className="h-px w-8 bg-border" />
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              <MaskText text={site.about.heading} />
-            </h2>
-          </div>
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            <MaskText text={site.about.heading} />
+          </h2>
           <ScrollRevealText
             paragraph={site.about.body}
             className="text-xl font-light leading-relaxed text-foreground/90"

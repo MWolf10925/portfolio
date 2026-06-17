@@ -21,31 +21,56 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
     frame.update(update, true);
 
-    // Proximity snap: when scrolling settles near a section top, glide to it.
+    // Section snap: commit off the full-height hero on scroll, then gentle
+    // proximity snap (in the scroll direction) for the content sections.
     let snapTimer: ReturnType<typeof setTimeout> | undefined;
+    let prevY = window.scrollY;
+    let dir = 1;
     function onScroll() {
+      const cy = window.scrollY;
+      if (cy !== prevY) dir = cy > prevY ? 1 : -1;
+      prevY = cy;
       clearTimeout(snapTimer);
       snapTimer = setTimeout(() => {
         const lenis = lenisRef.current?.lenis;
         if (!lenis || (lenis as { isScrolling?: boolean }).isScrolling) return;
         const y = window.scrollY;
         const vh = window.innerHeight;
-        const sections = Array.from(document.querySelectorAll("section[id]"));
-        let nearest: number | null = null;
-        let best = Infinity;
-        for (const s of sections) {
-          const top = s.getBoundingClientRect().top + y - 64;
-          const d = Math.abs(top - y);
-          if (d < best) {
-            best = d;
-            nearest = top;
-          }
+        const tops = Array.from(document.querySelectorAll("section[id]"))
+          .map((s) => s.getBoundingClientRect().top + y - 64)
+          .sort((a, b) => a - b);
+        if (tops.length < 2) return;
+
+        const heroTop = tops[0];
+        const firstContent = tops[1];
+
+        // Leaving the hero downward -> commit to the first content section.
+        if (dir > 0 && y > vh * 0.06 && y < firstContent - 8) {
+          lenis.scrollTo(firstContent, { duration: 0.8 });
+          return;
         }
-        // Only snap when "close enough" (within ~22% of the viewport).
-        if (nearest != null && best > 6 && best < vh * 0.22) {
-          lenis.scrollTo(nearest, { duration: 0.8 });
+        // Scrolling back up into the hero -> commit to the top.
+        if (dir < 0 && y < firstContent - 8 && y > 8) {
+          lenis.scrollTo(heroTop, { duration: 0.8 });
+          return;
         }
-      }, 160);
+
+        // Proximity snap for the rest, never against the scroll direction.
+        let nearest = tops[0];
+        for (const t of tops) if (Math.abs(t - y) < Math.abs(nearest - y)) nearest = t;
+        let target = nearest;
+        if (dir > 0 && target < y - 4) {
+          const ahead = tops.find((t) => t > y + 4);
+          if (ahead != null) target = ahead;
+        } else if (dir < 0 && target > y + 4) {
+          const behind = [...tops].reverse().find((t) => t < y - 4);
+          if (behind != null) target = behind;
+        }
+        const dist = Math.abs(target - y);
+        if (dist > 6 && dist < vh * 0.3) {
+          lenis.scrollTo(target, { duration: 0.7 });
+        }
+      }, 140);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
 

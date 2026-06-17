@@ -6,12 +6,12 @@ import { Logo } from "@/components/brand/logo";
 import { site } from "@/data/site";
 
 const nav = [
-  { num: "01", label: "Projects", href: "#projects" },
-  { num: "02", label: "Games", href: "#games" },
-  { num: "03", label: "About", href: "#about" },
-  { num: "04", label: "Skills", href: "#skills" },
-  { num: "05", label: "Experience", href: "#experience" },
-  { num: "06", label: "Contact", href: "#contact" },
+  { label: "Projects", href: "#projects" },
+  { label: "Games", href: "#games" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -72,20 +72,12 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "group flex items-center gap-1.5 text-sm transition-colors",
+                  "text-sm transition-colors",
                   isActive
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <span
-                  className={cn(
-                    "font-mono text-xs transition-colors",
-                    isActive ? "text-primary" : "text-muted-foreground/60"
-                  )}
-                >
-                  {item.num}
-                </span>
                 {item.label}
               </a>
             );

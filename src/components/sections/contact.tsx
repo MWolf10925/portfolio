@@ -12,8 +12,8 @@ export function Contact() {
     <section id="contact" className="sec sec-alt scroll-mt-20 py-28">
       <div className="container">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="font-mono text-sm font-medium text-primary">
-            06 <span className="text-muted-foreground">/ Contact</span>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+            Contact
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
             <MaskText text={site.contact.heading} />
