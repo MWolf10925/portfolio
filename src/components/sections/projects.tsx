@@ -121,7 +121,7 @@ export function Projects() {
   const rest = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="scroll-mt-20 border-t border-white/10 py-24">
+    <section id="projects" className="sec scroll-mt-20 py-24">
       <div className="container">
         <SectionHeading
           number="01"

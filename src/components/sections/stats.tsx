@@ -3,7 +3,7 @@ import { stats } from "@/data/stats";
 
 export function Stats() {
   return (
-    <section className="border-y border-white/10 bg-white/[0.05]">
+    <section className="sec sec-alt">
       <div className="container py-16">
         <Reveal className="mb-10">
           <p className="font-mono text-sm font-medium text-primary">
