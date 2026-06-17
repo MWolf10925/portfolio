@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float } from "@react-three/drei";
+import { Float, Environment, Lightformer } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -133,19 +133,19 @@ function MWModel() {
     <Float speed={1.3} rotationIntensity={0.22} floatIntensity={0.65}>
       <group ref={ref}>
         <mesh geometry={geom.m}>
-          <meshStandardMaterial color="#e9e5df" metalness={0.35} roughness={0.3} />
+          <meshStandardMaterial color="#eceae6" metalness={0.95} roughness={0.18} envMapIntensity={1.6} />
         </mesh>
         <mesh geometry={geom.w}>
-          <meshStandardMaterial color="#e9e5df" metalness={0.35} roughness={0.3} />
+          <meshStandardMaterial color="#eceae6" metalness={0.95} roughness={0.18} envMapIntensity={1.6} />
         </mesh>
         {geom.slashes.map((g, i) => (
           <mesh key={i} geometry={g} position={[0, 0, 0.06]}>
             <meshStandardMaterial
               color="#F26A1B"
-              metalness={0.3}
-              roughness={0.32}
-              emissive="#F26A1B"
-              emissiveIntensity={0.28}
+              metalness={0.5}
+              roughness={0.22}
+              emissive="#ff5a1a"
+              emissiveIntensity={1.3}
             />
           </mesh>
         ))}
@@ -162,9 +162,18 @@ export default function MW3D() {
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 0, 6], fov: 32 }}
     >
-      <ambientLight intensity={0.75} />
-      <directionalLight position={[4, 5, 6]} intensity={1.6} />
-      <pointLight position={[-4, -2, 3]} color="#F26A1B" intensity={1.5} />
+      <ambientLight intensity={0.2} />
+      <directionalLight position={[4, 5, 6]} intensity={0.5} />
+
+      {/* Colored studio reflections — this is where the vibrant color lives. */}
+      <Environment resolution={256} frames={1}>
+        <color attach="background" args={["#050505"]} />
+        <Lightformer color="#F26A1B" intensity={4} position={[3, 1.5, 4]} scale={[6, 6, 1]} />
+        <Lightformer color="#ff2d2d" intensity={3} position={[-4, -1.5, 3]} scale={[6, 5, 1]} />
+        <Lightformer color="#2f6bff" intensity={2.6} position={[0, 3, -4]} scale={[7, 6, 1]} />
+        <Lightformer color="#ffffff" intensity={1.4} position={[-2, 2.5, 4]} scale={[3, 3, 1]} />
+      </Environment>
+
       <group position={[2.45, 0, 0]} scale={0.5}>
         <MWModel />
       </group>

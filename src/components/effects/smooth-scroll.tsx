@@ -21,6 +21,34 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
     frame.update(update, true);
 
+    // Proximity snap: when scrolling settles near a section top, glide to it.
+    let snapTimer: ReturnType<typeof setTimeout> | undefined;
+    function onScroll() {
+      clearTimeout(snapTimer);
+      snapTimer = setTimeout(() => {
+        const lenis = lenisRef.current?.lenis;
+        if (!lenis || (lenis as { isScrolling?: boolean }).isScrolling) return;
+        const y = window.scrollY;
+        const vh = window.innerHeight;
+        const sections = Array.from(document.querySelectorAll("section[id]"));
+        let nearest: number | null = null;
+        let best = Infinity;
+        for (const s of sections) {
+          const top = s.getBoundingClientRect().top + y - 64;
+          const d = Math.abs(top - y);
+          if (d < best) {
+            best = d;
+            nearest = top;
+          }
+        }
+        // Only snap when "close enough" (within ~22% of the viewport).
+        if (nearest != null && best > 6 && best < vh * 0.22) {
+          lenis.scrollTo(nearest, { duration: 0.8 });
+        }
+      }, 160);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     // Smooth-scroll in-page anchor clicks through Lenis.
     function onClick(e: MouseEvent) {
       const a = (e.target as HTMLElement)?.closest?.('a[href^="#"]') as
@@ -38,6 +66,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     return () => {
       cancelFrame(update);
+      clearTimeout(snapTimer);
+      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("click", onClick);
     };
   }, []);
