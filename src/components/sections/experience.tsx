@@ -6,7 +6,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="scroll-mt-20 border-y border-border bg-card/30 py-24"
+      className="scroll-mt-20 border-t border-white/10 py-24"
     >
       <div className="container">
         <SectionHeading number="05" title="Experience" />

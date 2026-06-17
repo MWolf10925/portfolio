@@ -5,7 +5,7 @@ import { Float } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
-// MW monogram polylines (same geometry as the SVG logo), SVG space y-down.
+// MW monogram geometry (same as the SVG logo), SVG space y-down.
 const M_PTS: [number, number][] = [
   [36, 76],
   [30, 16],
@@ -20,70 +20,85 @@ const W_PTS: [number, number][] = [
   [90, 116],
   [84, 56],
 ];
-const SLASHES: [[number, number], [number, number]][] = [
-  [[32, 66], [50, 74]],
-  [[88, 66], [70, 74]],
+const SLASH_POLYS: [number, number][][] = [
+  [[32, 60], [51, 69], [51, 81], [32, 72]],
+  [[88, 60], [69, 69], [69, 81], [88, 72]],
 ];
 
-const S = 1 / 30; // scale svg units -> world units
-const THICK = 13 * S;
-const DEPTH = 11 * S;
+const S = 1 / 30; // svg units -> world units
+const HALF_W = 6.5 * S; // half the stroke width
 
-function map(p: [number, number]): [number, number] {
-  return [(p[0] - 60) * S, -(p[1] - 66) * S];
+function map([x, y]: [number, number]): [number, number] {
+  return [(x - 60) * S, -(y - 66) * S];
 }
 
-interface Seg {
-  pos: [number, number];
-  angle: number;
-  len: number;
-}
-
-function segments(pts: [number, number][]): Seg[] {
-  const out: Seg[] = [];
-  for (let i = 0; i < pts.length - 1; i++) {
-    const a = map(pts[i]);
-    const b = map(pts[i + 1]);
-    const dx = b[0] - a[0];
-    const dy = b[1] - a[1];
-    out.push({
-      pos: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2],
-      angle: Math.atan2(dy, dx),
-      len: Math.hypot(dx, dy),
-    });
+// Convert a centerline polyline into a clean closed outline (mitred joins).
+function strokeOutline(pts: [number, number][], hw: number): [number, number][] {
+  const n = pts.length;
+  const normals: [number, number][] = [];
+  for (let i = 0; i < n - 1; i++) {
+    const dx = pts[i + 1][0] - pts[i][0];
+    const dy = pts[i + 1][1] - pts[i][1];
+    const len = Math.hypot(dx, dy) || 1;
+    normals.push([-dy / len, dx / len]);
   }
-  return out;
+  const left: [number, number][] = [];
+  const right: [number, number][] = [];
+  for (let i = 0; i < n; i++) {
+    let nx: number, ny: number;
+    if (i === 0) [nx, ny] = normals[0];
+    else if (i === n - 1) [nx, ny] = normals[n - 2];
+    else {
+      const a = normals[i - 1];
+      const b = normals[i];
+      let mx = a[0] + b[0];
+      let my = a[1] + b[1];
+      const ml = Math.hypot(mx, my) || 1;
+      mx /= ml;
+      my /= ml;
+      const cosHalf = mx * a[0] + my * a[1];
+      const scale = 1 / Math.max(cosHalf, 0.4); // clamp miter spikes
+      nx = mx * scale;
+      ny = my * scale;
+    }
+    left.push([pts[i][0] + nx * hw, pts[i][1] + ny * hw]);
+    right.push([pts[i][0] - nx * hw, pts[i][1] - ny * hw]);
+  }
+  return [...left, ...right.reverse()];
 }
 
-function Beam({
-  seg,
-  color,
-  emissive = 0,
-}: {
-  seg: Seg;
-  color: string;
-  emissive?: number;
-}) {
-  return (
-    <mesh position={[seg.pos[0], seg.pos[1], 0]} rotation={[0, 0, seg.angle]}>
-      <boxGeometry args={[seg.len + THICK * 0.55, THICK, DEPTH]} />
-      <meshStandardMaterial
-        color={color}
-        metalness={0.3}
-        roughness={0.32}
-        emissive={color}
-        emissiveIntensity={emissive}
-      />
-    </mesh>
-  );
+function shapeFrom(outline: [number, number][]): THREE.Shape {
+  const s = new THREE.Shape();
+  s.moveTo(outline[0][0], outline[0][1]);
+  for (let i = 1; i < outline.length; i++) s.lineTo(outline[i][0], outline[i][1]);
+  s.closePath();
+  return s;
+}
+
+function extrude(shape: THREE.Shape, depth: number): THREE.ExtrudeGeometry {
+  const geo = new THREE.ExtrudeGeometry(shape, {
+    depth,
+    bevelEnabled: true,
+    bevelThickness: 0.045,
+    bevelSize: 0.04,
+    bevelSegments: 2,
+    curveSegments: 3,
+  });
+  geo.translate(0, 0, -depth / 2);
+  geo.computeVertexNormals();
+  return geo;
 }
 
 function MWModel() {
   const ref = useRef<THREE.Group>(null!);
   const mouse = useRef({ x: 0, y: 0 });
 
-  const white = useMemo(() => [...segments(M_PTS), ...segments(W_PTS)], []);
-  const orange = useMemo(() => SLASHES.map((s) => segments(s)[0]), []);
+  const geom = useMemo(() => {
+    const m = extrude(shapeFrom(strokeOutline(M_PTS.map(map), HALF_W)), 0.34);
+    const w = extrude(shapeFrom(strokeOutline(W_PTS.map(map), HALF_W)), 0.34);
+    const slashes = SLASH_POLYS.map((poly) => extrude(shapeFrom(poly.map(map)), 0.5));
+    return { m, w, slashes };
+  }, []);
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
@@ -91,8 +106,13 @@ function MWModel() {
       mouse.current.y = (e.clientY / window.innerHeight) * 2 - 1;
     };
     window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
-  }, []);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      geom.m.dispose();
+      geom.w.dispose();
+      geom.slashes.forEach((g) => g.dispose());
+    };
+  }, [geom]);
 
   useFrame((_, dt) => {
     const g = ref.current;
@@ -103,20 +123,31 @@ function MWModel() {
         ? Math.min(1, window.scrollY / (window.innerHeight || 1))
         : 0;
     const targetX = mouse.current.y * 0.3;
-    const targetY = mouse.current.x * 0.5 + sp * Math.PI * 0.6;
+    const targetY = mouse.current.x * 0.5 + sp * Math.PI * 0.55;
     g.rotation.x = THREE.MathUtils.damp(g.rotation.x, targetX, 4, d);
     g.rotation.y = THREE.MathUtils.damp(g.rotation.y, targetY, 4, d);
     g.position.y = THREE.MathUtils.damp(g.position.y, -sp * 1.4, 4, d);
   });
 
   return (
-    <Float speed={1.3} rotationIntensity={0.25} floatIntensity={0.7}>
+    <Float speed={1.3} rotationIntensity={0.22} floatIntensity={0.65}>
       <group ref={ref}>
-        {white.map((seg, i) => (
-          <Beam key={`w${i}`} seg={seg} color="#f4f1ee" />
-        ))}
-        {orange.map((seg, i) => (
-          <Beam key={`o${i}`} seg={seg} color="#F26A1B" emissive={0.3} />
+        <mesh geometry={geom.m}>
+          <meshStandardMaterial color="#e9e5df" metalness={0.35} roughness={0.3} />
+        </mesh>
+        <mesh geometry={geom.w}>
+          <meshStandardMaterial color="#e9e5df" metalness={0.35} roughness={0.3} />
+        </mesh>
+        {geom.slashes.map((g, i) => (
+          <mesh key={i} geometry={g} position={[0, 0, 0.06]}>
+            <meshStandardMaterial
+              color="#F26A1B"
+              metalness={0.3}
+              roughness={0.32}
+              emissive="#F26A1B"
+              emissiveIntensity={0.28}
+            />
+          </mesh>
         ))}
       </group>
     </Float>
@@ -131,9 +162,9 @@ export default function MW3D() {
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 0, 6], fov: 32 }}
     >
-      <ambientLight intensity={0.7} />
-      <directionalLight position={[4, 5, 6]} intensity={1.5} />
-      <pointLight position={[-4, -2, 3]} color="#F26A1B" intensity={1.6} />
+      <ambientLight intensity={0.75} />
+      <directionalLight position={[4, 5, 6]} intensity={1.6} />
+      <pointLight position={[-4, -2, 3]} color="#F26A1B" intensity={1.5} />
       <group position={[2.45, 0.35, 0]} scale={0.52}>
         <MWModel />
       </group>

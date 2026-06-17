@@ -9,7 +9,7 @@ export function Contact() {
   const hasGithub = Boolean(site.links.github) && (site.links.github as string) !== "#";
 
   return (
-    <section id="contact" className="scroll-mt-20 py-28">
+    <section id="contact" className="scroll-mt-20 border-y border-white/10 bg-white/[0.05] py-28">
       <div className="container">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="font-mono text-sm font-medium text-primary">

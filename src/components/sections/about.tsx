@@ -7,7 +7,7 @@ import { site } from "@/data/site";
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-20 border-y border-border bg-card/30 py-24">
+    <section id="about" className="scroll-mt-20 border-t border-white/10 py-24">
       <div className="container">
         {/* Heading + philosophy */}
         <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr]">

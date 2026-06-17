@@ -8,7 +8,7 @@ import { games } from "@/data/games";
 
 export function Games() {
   return (
-    <section id="games" className="scroll-mt-20 border-y border-border bg-card/30 py-24">
+    <section id="games" className="scroll-mt-20 border-y border-white/10 bg-white/[0.05] py-24">
       <div className="container">
         <SectionHeading
           number="02"
