@@ -121,7 +121,7 @@ export function Projects() {
   const rest = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="sec scroll-mt-20 py-24">
+    <section id="projects" className="sec scroll-mt-20 py-16 sm:py-24">
       <div className="container">
         <SectionHeading
           number="01"
@@ -130,7 +130,7 @@ export function Projects() {
         />
 
         {/* Big alternating image rows */}
-        <div className="flex flex-col gap-20">
+        <div className="flex flex-col gap-12 sm:gap-20">
           {featured.map((project, i) => (
             <FeaturedRow key={project.title} project={project} flip={i % 2 === 1} />
           ))}
@@ -142,7 +142,7 @@ export function Projects() {
         {/* Secondary work */}
         {rest.length > 0 && (
           <>
-            <Reveal className="mb-8 mt-24">
+            <Reveal className="mb-8 mt-16 sm:mt-24">
               <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
                 More work
               </h3>

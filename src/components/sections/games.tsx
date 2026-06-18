@@ -8,7 +8,7 @@ import { games } from "@/data/games";
 
 export function Games() {
   return (
-    <section id="games" className="sec sec-alt scroll-mt-20 py-24">
+    <section id="games" className="sec sec-alt scroll-mt-20 py-16 sm:py-24">
       <div className="container">
         <SectionHeading
           number="02"

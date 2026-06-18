@@ -59,7 +59,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
         }
       }, 140);
     }
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Section snapping only on precise pointers — never hijack touch scroll.
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    if (finePointer) {
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
 
     // Smooth-scroll in-page anchor clicks through Lenis.
     function onClick(e: MouseEvent) {

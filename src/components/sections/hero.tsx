@@ -63,7 +63,7 @@ export function Hero() {
     <section
       id="top"
       onMouseMove={handleMove}
-      className="relative flex min-h-screen items-center overflow-hidden bg-[hsl(20_14%_4%)]"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[hsl(20_14%_4%)]"
     >
       <div ref={spotlightRef} className="spotlight pointer-events-none absolute inset-0 -z-10" />
 
@@ -87,7 +87,7 @@ export function Hero() {
           variants={{ visible: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } } }}
           initial="hidden"
           animate="visible"
-          className="text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
+          className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
         >
           {words.map((word, i) => {
             const clean = word.replace(/[^a-zA-Z]/g, "");

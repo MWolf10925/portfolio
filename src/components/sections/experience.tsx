@@ -6,7 +6,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="sec scroll-mt-20 py-24"
+      className="sec scroll-mt-20 py-16 sm:py-24"
     >
       <div className="container">
         <SectionHeading number="05" title="Experience" />
