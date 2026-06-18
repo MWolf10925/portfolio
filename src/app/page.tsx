@@ -2,6 +2,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Preloader } from "@/components/effects/preloader";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
+import { SectionRail } from "@/components/effects/section-rail";
 import { Hero } from "@/components/sections/hero";
 import { Stats } from "@/components/sections/stats";
 import { Projects } from "@/components/sections/projects";
@@ -16,6 +17,7 @@ export default function Home() {
     <>
       <Preloader />
       <ScrollProgress />
+      <SectionRail />
       <Navbar />
       <main>
         <Hero />
