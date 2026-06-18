@@ -121,12 +121,14 @@ export function Hero() {
               </a>
             </Button>
           </Magnetic>
-          <Button asChild size="lg" variant="outline">
-            <a href="#contact">
-              <Mail className="h-4 w-4" />
-              Contact
-            </a>
-          </Button>
+          <Magnetic>
+            <Button asChild size="lg" variant="outline">
+              <a href="#contact">
+                <Mail className="h-4 w-4" />
+                Contact
+              </a>
+            </Button>
+          </Magnetic>
         </motion.div>
       </motion.div>
 

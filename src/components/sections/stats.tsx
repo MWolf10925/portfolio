@@ -1,31 +1,49 @@
 import { Reveal } from "@/components/reveal";
-import { stats } from "@/data/stats";
+import { CountUp } from "@/components/animations/count-up";
+import { bigStats, proofPoints } from "@/data/stats";
 
 export function Stats() {
   return (
     <section className="sec sec-alt">
       <div className="container py-16">
-        <Reveal className="mb-10">
+        <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
             Proof
           </p>
         </Reveal>
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {stats.map((stat, i) => (
-            <Reveal key={stat.label} index={i} className="bg-card">
-              <div className="h-full p-6">
-                <p className="text-base font-semibold tracking-tight text-foreground">
-                  {stat.label}
-                </p>
-                {stat.detail && (
-                  <p className="mt-1.5 text-sm text-muted-foreground">
-                    {stat.detail}
-                  </p>
-                )}
+
+        {/* Big animated numbers */}
+        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">
+          {bigStats.map((s, i) => (
+            <Reveal key={s.label} index={i}>
+              <div>
+                <div className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
+                  <CountUp
+                    to={s.value}
+                    decimals={s.decimals}
+                    comma={s.comma}
+                    suffix={s.suffix}
+                  />
+                </div>
+                <div className="mt-2 text-sm text-muted-foreground">{s.label}</div>
               </div>
             </Reveal>
           ))}
         </div>
+
+        {/* Qualitative proof */}
+        <Reveal index={1} className="mt-10">
+          <div className="flex flex-wrap items-center gap-y-2 border-t border-border pt-6 font-mono text-sm text-muted-foreground">
+            {proofPoints.map((p, i) => (
+              <span key={p} className="inline-flex items-center">
+                {p}
+                {i < proofPoints.length - 1 && (
+                  <span className="mx-3 text-primary">/</span>
+                )}
+              </span>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

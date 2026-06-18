@@ -2,6 +2,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { MaskText } from "@/components/animations/mask-text";
+import { Magnetic } from "@/components/effects/magnetic";
 import { site } from "@/data/site";
 
 export function Contact() {
@@ -23,12 +24,14 @@ export function Contact() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Button asChild size="lg">
-              <a href={`mailto:${site.email}`}>
-                <Mail className="h-4 w-4" />
-                Email me
-              </a>
-            </Button>
+            <Magnetic>
+              <Button asChild size="lg">
+                <a href={`mailto:${site.email}`}>
+                  <Mail className="h-4 w-4" />
+                  Email me
+                </a>
+              </Button>
+            </Magnetic>
             <Button asChild size="lg" variant="outline">
               <a href={site.links.github} target="_blank" rel="noopener noreferrer">
                 <Github className="h-4 w-4" />

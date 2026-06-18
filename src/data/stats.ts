@@ -1,20 +1,23 @@
 // ───────────────────────────────────────────────────────────────────────────
-//  PROOF / STATS  ·  short, verifiable credibility points
+//  PROOF  ·  big animated numbers + qualitative credibility points
 // ───────────────────────────────────────────────────────────────────────────
 
-export interface Stat {
+export interface BigStat {
+  value: number;
+  decimals?: number;
+  comma?: boolean;
+  suffix?: string;
   label: string;
-  detail?: string;
 }
 
-export const stats: Stat[] = [
-  { label: "VEX Worlds Qualified", detail: "Competitive VEX V5 robotics" },
-  { label: "4.0 Unweighted GPA", detail: "High school / early college" },
-  { label: "5,000+ game project plays", detail: "Across published independent projects" },
-  { label: "Robotics Lead Programmer", detail: "3009H Heroic Robotics" },
-  { label: "Built PID auto-tuning workflow", detail: "Days of tuning → ~1–5 minutes" },
-  {
-    label: "6 languages in active use",
-    detail: "C++, Python, JavaScript, Java, Lua, SQL",
-  },
+export const bigStats: BigStat[] = [
+  { value: 5000, comma: true, suffix: "+", label: "Game plays" },
+  { value: 4.0, decimals: 1, label: "Unweighted GPA" },
+  { value: 6, label: "Languages in use" },
+];
+
+export const proofPoints: string[] = [
+  "VEX Worlds Qualified",
+  "Lead Programmer · 3009H Heroic Robotics",
+  "PID auto-tuner: days → ~1–5 min",
 ];
