@@ -17,7 +17,7 @@ export function Stats() {
           {bigStats.map((s, i) => (
             <Reveal key={s.label} index={Math.min(i, 2)}>
               <div>
-                <div className="text-4xl font-semibold tabular-nums tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                <div className="font-display text-4xl font-semibold tabular-nums tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                   <CountUp
                     to={s.value}
                     decimals={s.decimals}

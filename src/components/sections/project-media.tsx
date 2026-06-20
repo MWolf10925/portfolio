@@ -15,11 +15,14 @@ export function ProjectMedia({
   alt,
   aspect = "aspect-[16/10]",
   parallax = false,
+  reveal = false,
 }: {
   src?: string;
   alt: string;
   aspect?: string;
   parallax?: boolean;
+  /** Clip-path wipe as the frame scrolls into view (featured rows). */
+  reveal?: boolean;
 }) {
   const [errored, setErrored] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -31,10 +34,15 @@ export function ProjectMedia({
   const y = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
   const showImage = Boolean(src) && !errored;
   const useParallax = parallax && !reduce;
+  const useReveal = reveal && !reduce;
 
   return (
-    <div
+    <motion.div
       ref={ref}
+      initial={useReveal ? { clipPath: "inset(0 100% 0 0)" } : false}
+      whileInView={useReveal ? { clipPath: "inset(0 0% 0 0)" } : undefined}
+      viewport={{ once: true, margin: "-12%" }}
+      transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
       className={`group relative ${aspect} w-full overflow-hidden rounded-lg border border-border bg-card`}
     >
       {showImage ? (
@@ -72,6 +80,6 @@ export function ProjectMedia({
       )}
       {/* sheen */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-    </div>
+    </motion.div>
   );
 }

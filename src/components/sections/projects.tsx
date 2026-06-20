@@ -21,7 +21,7 @@ function FeaturedRow({ project, flip }: { project: Project; flip: boolean }) {
     <Reveal className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
       <div className={flip ? "md:order-2" : ""}>
         <SpotlightCard tilt={4}>
-          <ProjectMedia src={project.image} alt={project.title} parallax />
+          <ProjectMedia src={project.image} alt={project.title} parallax reveal />
         </SpotlightCard>
       </div>
 

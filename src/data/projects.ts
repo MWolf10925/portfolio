@@ -43,6 +43,8 @@ export const projects: Project[] = [
       "Internship work: built and shipped a CRM-importer Chrome extension (live on the Chrome Web Store) plus companion iOS/Android apps. One-click import of 100+ client records (notes, invoices, jobs, payments, locations), Stripe tap-to-pay, background/fleet tracking, and Supabase auth.",
     tags: ["TypeScript", "Chrome Extension", "Stripe", "Supabase", "Cloud Run"],
     status: "Internship · Shipped",
+    featured: true,
+    image: "/projects/instant-quote.jpg",
   },
   {
     title: "Private Robotics PID Tuning Workflow",
