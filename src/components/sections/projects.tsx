@@ -125,7 +125,7 @@ export function Projects() {
       <div className="container">
         <SectionHeading
           title="Selected work"
-          description="Competition robotics, internship automation, and independent builds — most are on GitHub. A few stay private to protect competitive or confidential code."
+          description="Competition robotics, internship automation, and independent builds, most on GitHub. A few stay private to protect competitive or confidential code."
         />
 
         {/* Big alternating image rows */}

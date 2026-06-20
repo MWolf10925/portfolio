@@ -33,7 +33,7 @@ export function Marquee() {
   );
 
   return (
-    <div className="marquee-mask relative overflow-hidden border-y border-border/60 py-10">
+    <div className="marquee-mask relative overflow-hidden py-12">
       <div className="marquee">
         {sequence}
         {sequence}

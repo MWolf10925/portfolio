@@ -122,44 +122,21 @@
   }
 }
 
-/* ── Section rhythm: alternating panels + glowing orange dividers ─────────── */
+/* ── Section rhythm: seamless, blended panels (no hard dividers) ──────────── */
 .sec {
   position: relative;
 }
-/* Bright orange gradient divider line at the top of each section. */
-.sec::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(22 95% 55% / 0.65) 50%,
-    transparent
-  );
-  pointer-events: none;
-}
-/* Soft glow bleeding down from that divider for extra pop. */
-.sec::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 9rem;
-  background: radial-gradient(
-    55% 100% at 50% 0%,
-    hsl(22 95% 55% / 0.07),
-    transparent 70%
-  );
-  pointer-events: none;
-}
-/* Elevated, clearly-lighter panel for alternating sections. */
+/* Alternating sections get a soft gradient "swell": the top and bottom edges
+   match the page background exactly (no visible seam), with a barely-lighter
+   middle for gentle rhythm. Sections melt into one another as you scroll. */
 .sec-alt {
-  background-color: hsl(28 10% 14.5%);
+  background: linear-gradient(
+    180deg,
+    hsl(var(--background)) 0%,
+    hsl(26 9% 11%) 26%,
+    hsl(26 9% 11%) 74%,
+    hsl(var(--background)) 100%
+  );
 }
 
 /* Pulsing availability dot (respects reduced-motion). */

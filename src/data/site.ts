@@ -28,7 +28,7 @@ export const site = {
     {
       school: "Randall K. Cooper High School",
       detail: "Early College Program · GPA 4.0 (unweighted) · 33 ACT Math",
-      period: "2023 – 2027 (expected)",
+      period: "2023 to 2027 (expected)",
     },
     {
       school: "Northern Kentucky University",
@@ -39,7 +39,7 @@ export const site = {
 
   about: {
     heading: "How I build",
-    body: "I'm not trying to look like a finished expert. I'm building proof through real projects: robotics systems, automation tools, web experiments, and AI workflows that solve actual problems. My focus is simple. Learn fast, build useful things, test them, and keep improving.",
+    body: "I'm not trying to look like a finished expert. I'm building proof through real projects. Robotics systems, automation tools, web experiments, and AI workflows that solve actual problems. My focus is simple. Learn fast, build useful things, test them, and keep improving.",
     // What I'm working toward (professional framing).
     buildingToward: [
       "Tools and systems that are actually useful to real people.",

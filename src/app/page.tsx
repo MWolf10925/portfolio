@@ -3,7 +3,6 @@ import { Footer } from "@/components/footer";
 import { Preloader } from "@/components/effects/preloader";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { SectionRail } from "@/components/effects/section-rail";
-import { VelocitySkew } from "@/components/effects/velocity-skew";
 import { Marquee } from "@/components/effects/marquee";
 import { Hero } from "@/components/sections/hero";
 import { Stats } from "@/components/sections/stats";
@@ -23,16 +22,14 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <VelocitySkew>
-          <Stats />
-          <Marquee />
-          <Projects />
-          <Games />
-          <About />
-          <Skills />
-          <Experience />
-          <Contact />
-        </VelocitySkew>
+        <Stats />
+        <Marquee />
+        <Projects />
+        <Games />
+        <About />
+        <Skills />
+        <Experience />
+        <Contact />
       </main>
       <Footer />
     </>

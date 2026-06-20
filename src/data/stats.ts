@@ -20,5 +20,5 @@ export const bigStats: BigStat[] = [
 export const proofPoints: string[] = [
   "VEX Worlds Qualified",
   "Lead Programmer · 3009H Heroic Robotics",
-  "PID auto-tuner: days → ~1–5 min",
+  "PID auto-tuner cuts tuning to minutes",
 ];

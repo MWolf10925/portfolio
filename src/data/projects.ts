@@ -20,7 +20,7 @@ export const projects: Project[] = [
   {
     title: "Robotics Autonomous Systems",
     description:
-      "C++ autonomy for VEX: routines, odometry, sensor feedback, and driver control. The backbone of a Worlds-qualified robot.",
+      "C++ autonomy for VEX, including routines, odometry, sensor feedback, and driver control. The backbone of a Worlds-qualified robot.",
     tags: ["C++", "VEX V5", "Odometry", "Sensors", "Autonomous"],
     status: "Competition",
     featured: true,
@@ -38,9 +38,9 @@ export const projects: Project[] = [
     href: "https://github.com/MWolf10925/robotics-autonomous-systems-case-study",
   },
   {
-    title: "Instant Quote — CRM Importer & Automation",
+    title: "Instant Quote · CRM Importer & Automation",
     description:
-      "Internship work: built and shipped a CRM-importer Chrome extension (live on the Chrome Web Store) plus companion iOS/Android apps. One-click import of 100+ client records (notes, invoices, jobs, payments, locations), Stripe tap-to-pay, background/fleet tracking, and Supabase auth.",
+      "Built and shipped a CRM-importer Chrome extension during my internship, live on the Chrome Web Store, plus companion iOS and Android apps. One-click import of 100+ client records (notes, invoices, jobs, payments, locations), Stripe tap-to-pay, background and fleet tracking, and Supabase auth.",
     tags: ["TypeScript", "Chrome Extension", "Stripe", "Supabase", "Cloud Run"],
     status: "Internship · Shipped",
     featured: true,
@@ -49,7 +49,7 @@ export const projects: Project[] = [
   {
     title: "Private Robotics PID Tuning Workflow",
     description:
-      "A custom PID auto-tuner that cut drivetrain tuning from multiple days to roughly 1–5 minutes. Kept private to protect competitive advantage.",
+      "A custom PID auto-tuner that cut drivetrain tuning from multiple days to roughly 1 to 5 minutes. Kept private to protect competitive advantage.",
     tags: ["C++", "PID Control", "Robotics", "Testing", "Automation"],
     status: "Private / Case Study",
   },
@@ -77,7 +77,7 @@ export const projects: Project[] = [
   {
     title: "Jarvis AI Command Center",
     description:
-      "A local AI assistant for productivity, focus sessions, hotkeys, and task management — useful on your machine without expensive API calls.",
+      "A local AI assistant for productivity, focus sessions, hotkeys, and task management. Runs on your own machine without expensive API calls.",
     tags: ["Python", "Local AI", "Automation"],
     href: "https://github.com/MWolf10925/jarvis-ai-command-center",
   },

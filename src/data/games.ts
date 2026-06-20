@@ -24,14 +24,14 @@ export const games: Game[] = [
     title: "Tower Offense",
     genre: "Strategy",
     description:
-      "Reverse tower-defense: instead of holding off waves, you attack the defenses with different characters and abilities.",
+      "Reverse tower-defense. Instead of holding off waves, you attack the defenses with different characters and abilities.",
     image: "/games/tower-offense.png",
     href: "https://www.roblox.com/games/112312927264179/Tower-Offense",
   },
   {
     title: "Road Rage",
     genre: "Open World",
-    description: "An open-world driving game: roam a custom city and earn cash. My take on GTA.",
+    description: "An open-world driving game where you roam a custom city and earn cash. My take on GTA.",
     image: "/games/road-rage.png",
   },
   {
