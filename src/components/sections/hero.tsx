@@ -26,8 +26,8 @@ const item = {
   },
 };
 
-// Words that get the animated gradient treatment in the headline.
-const GRADIENT_WORDS = new Set(["robotics", "automation", "AI"]);
+// Key words rendered in solid brand orange in the headline.
+const ACCENT_WORDS = new Set(["robotics", "automation", "AI"]);
 
 const wordVariant = {
   hidden: { opacity: 0, y: "0.5em" },
@@ -91,12 +91,12 @@ export function Hero() {
         >
           {words.map((word, i) => {
             const clean = word.replace(/[^a-zA-Z]/g, "");
-            const isGradient = GRADIENT_WORDS.has(clean);
+            const isAccent = ACCENT_WORDS.has(clean);
             return (
               <span key={i} className="inline-block overflow-hidden align-bottom">
                 <motion.span
                   variants={wordVariant}
-                  className={`mr-[0.25em] inline-block ${isGradient ? "text-shimmer" : ""}`}
+                  className={`mr-[0.25em] inline-block ${isAccent ? "text-accent" : ""}`}
                 >
                   {word}
                 </motion.span>

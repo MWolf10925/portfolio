@@ -61,6 +61,14 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Even line lengths on headings; fewer orphans in prose. */
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
   /* Subtle ambient background glow + grid texture */
   body::before {
     content: "";
@@ -88,8 +96,11 @@
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent;
+  /* Solid brand-orange emphasis with a soft glow — used on hero key words.
+     Replaces gradient-clipped text (cleaner, more confident, on-brand). */
+  .text-accent {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 28px hsl(var(--primary) / 0.35);
   }
   .grid-texture {
     background-image: linear-gradient(hsl(var(--border) / 0.4) 1px, transparent 1px),

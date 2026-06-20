@@ -43,6 +43,8 @@ export function ProjectMedia({
           <motion.img
             src={src}
             alt={alt}
+            loading="lazy"
+            decoding="async"
             onError={() => setErrored(true)}
             style={{ y }}
             className="absolute inset-x-0 -top-[10%] h-[120%] w-full object-cover"
@@ -52,6 +54,8 @@ export function ProjectMedia({
           <img
             src={src}
             alt={alt}
+            loading="lazy"
+            decoding="async"
             onError={() => setErrored(true)}
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
