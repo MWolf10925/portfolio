@@ -94,27 +94,27 @@ export function Hero() {
       )}
 
       <motion.div
-        className="container relative z-10 max-w-5xl"
+        className="container relative z-10 max-w-3xl"
         variants={container}
         initial="hidden"
         animate="visible"
         style={reduce ? undefined : { y: exitY, opacity: exitOpacity }}
       >
-        {/* Giant word-by-word headline; key words in solid brand orange. */}
+        {/* Word-by-word headline; key words in solid brand orange. */}
         <motion.h1
-          variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } } }}
+          variants={{ visible: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } } }}
           initial="hidden"
           animate="visible"
-          className="text-balance text-5xl font-semibold leading-[0.95] tracking-[-0.03em] sm:text-7xl lg:text-8xl xl:text-[8.5rem]"
+          className="text-balance text-4xl font-semibold leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
         >
           {words.map((word, i) => {
             const clean = word.replace(/[^a-zA-Z]/g, "");
             const isAccent = ACCENT_WORDS.has(clean);
             return (
-              <span key={i} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+              <span key={i} className="inline-block overflow-hidden align-bottom">
                 <motion.span
                   variants={wordVariant}
-                  className={`mr-[0.22em] inline-block ${isAccent ? "text-accent" : ""}`}
+                  className={`mr-[0.25em] inline-block ${isAccent ? "text-accent" : ""}`}
                 >
                   {word}
                 </motion.span>
@@ -125,12 +125,12 @@ export function Hero() {
 
         <motion.p
           variants={item}
-          className="mt-8 max-w-xl text-lg text-muted-foreground sm:text-xl"
+          className="mt-6 max-w-xl text-lg text-muted-foreground"
         >
           {site.hero.subheadline}
         </motion.p>
 
-        <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-3">
+        <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-3">
           <Magnetic>
             <Button asChild size="lg">
               <a href="#projects">

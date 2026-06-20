@@ -11,11 +11,11 @@ import { ProjectMedia } from "@/components/sections/project-media";
 import { games, type Game } from "@/data/games";
 
 /** A single game card — shared by the desktop rail and the mobile grid. */
-function GameCard({ game }: { game: Game }) {
+function GameCard({ game, aspect = "aspect-square" }: { game: Game; aspect?: string }) {
   return (
     <SpotlightCard className="h-full" tilt={6}>
       <div className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors duration-300 hover:border-primary/50">
-        <ProjectMedia src={game.image} alt={`${game.title} cover art`} aspect="aspect-square" />
+        <ProjectMedia src={game.image} alt={`${game.title} cover art`} aspect={aspect} />
         <div className="flex flex-1 flex-col p-5">
           <div className="flex items-center justify-between gap-2">
             <h3 className="font-semibold tracking-tight">{game.title}</h3>
@@ -108,15 +108,18 @@ export function Games() {
     );
   }
 
-  // Desktop: pinned horizontal rail.
+  // Desktop: pinned horizontal rail. Cards use a 4:3 image and a capped width
+  // so a full card always fits inside the pinned viewport.
   return (
     <section id="games" ref={sectionRef} className="relative" style={{ height: sectionH }}>
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-20">
-        <div className="container">
-          <SectionHeading
-            title="Games I've built"
-            description="Roblox games I designed and built across several genres. Over 5,000 total plays. Keep scrolling."
-          />
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-8">
+        <div className="container mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            Games I&apos;ve built
+          </h2>
+          <p className="max-w-sm text-sm text-muted-foreground">
+            Roblox games across several genres, 5,000+ plays. Scroll to move through them.
+          </p>
         </div>
         <motion.div
           ref={trackRef}
@@ -124,8 +127,8 @@ export function Games() {
           className="flex gap-6 pl-[max(1.5rem,calc((100vw-1100px)/2))] pr-[12vw]"
         >
           {games.map((game) => (
-            <div key={game.title} className="w-[30rem] shrink-0">
-              <GameCard game={game} />
+            <div key={game.title} className="w-[24rem] shrink-0">
+              <GameCard game={game} aspect="aspect-[4/3]" />
             </div>
           ))}
         </motion.div>
