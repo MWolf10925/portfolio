@@ -27,9 +27,10 @@ export const experience: Experience[] = [
     org: "Instant Quote",
     period: "Jun 2026 – Present · Cincinnati, OH",
     bullets: [
-      "Build browser-based automation tools that streamline quoting workflows, reduce manual work, and improve user experience.",
-      "Shipped a published Chrome extension (client/CRM importer) through the Chrome Web Store, including review, privacy-policy, and release work.",
-      "Work across product development, workflow automation, browser tooling, and frontend improvements for real-world business operations.",
+      "Built and shipped a CRM-importer Chrome extension (live on the Chrome Web Store) that scrapes and organizes 100+ client records — notes, invoices, jobs, payments, files, and locations — into a one-click import/export flow.",
+      "Published companion iOS and Android apps to the App Store and Google Play: privacy policies, demo videos, TestFlight and manual on-device testing, and review submissions.",
+      "Shipped tap-to-pay payments with Stripe, a point-of-sale flow, background location + fleet/mileage tracking, clock-in/out, and Supabase auth.",
+      "Worked across Google Cloud Run (terminal deploys), API integrations, HTML scraping, and a simplified dark/light-mode UI.",
     ],
   },
   {

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const sections = [
+  { id: "top", label: "Top" },
   { id: "projects", label: "Projects" },
   { id: "games", label: "Games" },
   { id: "about", label: "About" },
