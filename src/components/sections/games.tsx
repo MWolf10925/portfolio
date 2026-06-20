@@ -11,7 +11,15 @@ import { ProjectMedia } from "@/components/sections/project-media";
 import { games, type Game } from "@/data/games";
 
 /** A single game card — shared by the desktop rail and the mobile grid. */
-function GameCard({ game, aspect = "aspect-square" }: { game: Game; aspect?: string }) {
+function GameCard({
+  game,
+  aspect = "aspect-square",
+  clampDesc = false,
+}: {
+  game: Game;
+  aspect?: string;
+  clampDesc?: boolean;
+}) {
   return (
     <SpotlightCard className="h-full" tilt={6}>
       <div className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors duration-300 hover:border-primary/50">
@@ -21,7 +29,11 @@ function GameCard({ game, aspect = "aspect-square" }: { game: Game; aspect?: str
             <h3 className="font-semibold tracking-tight">{game.title}</h3>
             <Badge variant="primary">{game.genre}</Badge>
           </div>
-          <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+          <p
+            className={`mt-3 flex-1 text-sm leading-relaxed text-muted-foreground ${
+              clampDesc ? "line-clamp-2" : ""
+            }`}
+          >
             {game.description}
           </p>
           <div className="mt-4">
@@ -108,12 +120,12 @@ export function Games() {
     );
   }
 
-  // Desktop: pinned horizontal rail. Cards use a 4:3 image and a capped width
-  // so a full card always fits inside the pinned viewport.
+  // Desktop: pinned horizontal rail. Short 16:10 image + 2-line description +
+  // capped width keeps a full card comfortably inside the pinned viewport.
   return (
     <section id="games" ref={sectionRef} className="relative" style={{ height: sectionH }}>
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-8">
-        <div className="container mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-6">
+        <div className="container mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             Games I&apos;ve built
           </h2>
@@ -127,8 +139,8 @@ export function Games() {
           className="flex gap-6 pl-[max(1.5rem,calc((100vw-1100px)/2))] pr-[12vw]"
         >
           {games.map((game) => (
-            <div key={game.title} className="w-[24rem] shrink-0">
-              <GameCard game={game} aspect="aspect-[4/3]" />
+            <div key={game.title} className="w-[20rem] shrink-0">
+              <GameCard game={game} aspect="aspect-[16/10]" clampDesc />
             </div>
           ))}
         </motion.div>
