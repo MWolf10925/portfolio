@@ -29,7 +29,7 @@ export const site = {
   education: [
     {
       school: "Randall K. Cooper High School",
-      detail: "Early College Program · GPA 4.0 (unweighted)",
+      detail: "Early College Program · GPA 4.0 (unweighted) · 33 ACT Math",
       period: "2023 – 2027 (expected)",
     },
     {

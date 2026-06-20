@@ -13,11 +13,11 @@ export function Stats() {
         </Reveal>
 
         {/* Big animated numbers */}
-        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">
+        <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 sm:gap-8">
           {bigStats.map((s, i) => (
-            <Reveal key={s.label} index={i}>
+            <Reveal key={s.label} index={Math.min(i, 2)}>
               <div>
-                <div className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
+                <div className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                   <CountUp
                     to={s.value}
                     decimals={s.decimals}
