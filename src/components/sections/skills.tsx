@@ -8,7 +8,7 @@ export function Skills() {
   return (
     <section id="skills" className="sec sec-alt scroll-mt-20 py-16 sm:py-24">
       <div className="container">
-        <SectionHeading number="04" title="Skills" />
+        <SectionHeading title="Skills" />
       </div>
 
       <div className="container mt-8">

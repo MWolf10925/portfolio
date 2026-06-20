@@ -22,8 +22,6 @@ export const site = {
   hero: {
     headline: "I build robotics, automation, and AI tools.",
     subheadline: "High school developer and VEX robotics lead programmer.",
-    // Short mono "currently" line under the hero.
-    currently: "Automation intern @ Instant Quote · competitive VEX C++",
   },
 
   education: [

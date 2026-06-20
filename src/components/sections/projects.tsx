@@ -124,8 +124,7 @@ export function Projects() {
     <section id="projects" className="sec scroll-mt-20 py-16 sm:py-24">
       <div className="container">
         <SectionHeading
-          number="01"
-          title="Featured projects"
+          title="Selected work"
           description="Competition robotics, internship automation, and independent builds — most are on GitHub. A few stay private to protect competitive or confidential code."
         />
 

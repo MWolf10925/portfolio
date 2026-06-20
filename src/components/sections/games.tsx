@@ -11,7 +11,6 @@ export function Games() {
     <section id="games" className="sec sec-alt scroll-mt-20 py-16 sm:py-24">
       <div className="container">
         <SectionHeading
-          number="02"
           title="Games I've built"
           description="Roblox games I designed and built across several genres. Over 5,000 total plays."
         />

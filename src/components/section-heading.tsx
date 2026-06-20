@@ -2,8 +2,6 @@ import { MaskText } from "@/components/animations/mask-text";
 import { WordReveal } from "@/components/animations/word-reveal";
 
 interface SectionHeadingProps {
-  /** Optional; no longer rendered (sections show just the words). */
-  number?: string;
   title: string;
   description?: string;
 }

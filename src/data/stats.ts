@@ -14,7 +14,7 @@ export const bigStats: BigStat[] = [
   { value: 5000, comma: true, suffix: "+", label: "Game plays" },
   { value: 4.0, decimals: 1, label: "Unweighted GPA" },
   { value: 33, label: "ACT Math" },
-  { value: 6, label: "Languages in use" },
+  { value: 3, label: "Apps shipped to stores" },
 ];
 
 export const proofPoints: string[] = [
