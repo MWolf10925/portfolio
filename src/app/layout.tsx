@@ -52,6 +52,8 @@ export default function RootLayout({
       <body className="font-sans">
         <Cursor />
         <SmoothScroll>{children}</SmoothScroll>
+        {/* Fine film grain over everything — premium texture, kills banding. */}
+        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );

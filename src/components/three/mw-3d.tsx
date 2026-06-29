@@ -89,9 +89,30 @@ function extrude(shape: THREE.Shape, depth: number): THREE.ExtrudeGeometry {
   return geo;
 }
 
+// Overshooting ease for the entrance pop.
+function easeOutBack(x: number): number {
+  const c1 = 1.70158;
+  const c3 = c1 + 1;
+  return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+}
+
+/** A white light that slowly orbits the logo so a highlight sweeps the metal. */
+function SweepLight() {
+  const ref = useRef<THREE.DirectionalLight>(null!);
+  useFrame((state) => {
+    const t = state.clock.elapsedTime;
+    ref.current.position.set(Math.sin(t * 0.45) * 6, 2.5 + Math.sin(t * 0.3) * 1.5, Math.cos(t * 0.45) * 5 + 3);
+  });
+  return <directionalLight ref={ref} intensity={1.5} color="#ffffff" />;
+}
+
 function MWModel() {
   const ref = useRef<THREE.Group>(null!);
   const mouse = useRef({ x: 0, y: 0 });
+  const spin = useRef(0); // continuous base rotation
+  const start = useRef(-1); // entrance start time
+  const tiltX = useRef(0);
+  const tiltY = useRef(0);
 
   const geom = useMemo(() => {
     const m = extrude(shapeFrom(strokeOutline(M_PTS.map(map), HALF_W)), 0.34);
@@ -114,41 +135,67 @@ function MWModel() {
     };
   }, [geom]);
 
-  useFrame((_, dt) => {
+  useFrame((state, dt) => {
     const g = ref.current;
     if (!g) return;
     const d = Math.min(dt, 0.05);
-    const sp =
-      typeof window !== "undefined"
-        ? Math.min(1, window.scrollY / (window.innerHeight || 1))
-        : 0;
-    const targetX = mouse.current.y * 0.3;
-    const targetY = mouse.current.x * 0.5 + sp * Math.PI * 0.55;
-    g.rotation.x = THREE.MathUtils.damp(g.rotation.x, targetX, 4, d);
-    g.rotation.y = THREE.MathUtils.damp(g.rotation.y, targetY, 4, d);
-    g.position.y = THREE.MathUtils.damp(g.position.y, -sp * 1.4, 4, d);
+
+    // Entrance: spin-in + scale pop with overshoot, once.
+    if (start.current < 0) start.current = state.clock.elapsedTime;
+    const e = Math.min(1, (state.clock.elapsedTime - start.current) / 1.25);
+    const entered = easeOutBack(e);
+
+    // Continuous slow turn so the static studio sweeps highlights across it.
+    spin.current += d * 0.2;
+
+    // Mouse parallax (damped) + a little extra entrance spin.
+    tiltX.current = THREE.MathUtils.damp(tiltX.current, mouse.current.y * 0.32, 4, d);
+    tiltY.current = THREE.MathUtils.damp(tiltY.current, mouse.current.x * 0.6, 5, d);
+
+    const entranceSpin = (1 - e) * Math.PI * 1.6;
+    g.rotation.x = tiltX.current;
+    g.rotation.y = spin.current + tiltY.current + entranceSpin;
+    g.scale.setScalar(entered);
   });
 
   return (
-    <Float speed={1.3} rotationIntensity={0.22} floatIntensity={0.65}>
-      <group ref={ref}>
+    <Float speed={1.2} rotationIntensity={0.14} floatIntensity={0.6}>
+      <group ref={ref} scale={0}>
         <mesh geometry={geom.m}>
-          <meshStandardMaterial color="#f4f2ee" metalness={0.6} roughness={0.16} envMapIntensity={0.85} />
+          <meshPhysicalMaterial
+            color="#f4f2ee"
+            metalness={0.55}
+            roughness={0.17}
+            clearcoat={1}
+            clearcoatRoughness={0.14}
+            envMapIntensity={1.05}
+          />
         </mesh>
         <mesh geometry={geom.w}>
-          <meshStandardMaterial color="#f4f2ee" metalness={0.6} roughness={0.16} envMapIntensity={0.85} />
+          <meshPhysicalMaterial
+            color="#f4f2ee"
+            metalness={0.55}
+            roughness={0.17}
+            clearcoat={1}
+            clearcoatRoughness={0.14}
+            envMapIntensity={1.05}
+          />
         </mesh>
         {geom.slashes.map((g, i) => (
           <mesh key={i} geometry={g} position={[0, 0, 0.06]}>
-            <meshStandardMaterial
+            <meshPhysicalMaterial
               color="#F26A1B"
-              metalness={0.4}
-              roughness={0.28}
+              metalness={0.35}
+              roughness={0.22}
+              clearcoat={1}
+              clearcoatRoughness={0.2}
               emissive="#F26A1B"
-              emissiveIntensity={0.5}
+              emissiveIntensity={0.85}
             />
           </mesh>
         ))}
+        {/* Orange glow bleeding onto the white metal (fake bloom). */}
+        <pointLight position={[0, 0, 1.2]} intensity={6} distance={4} decay={2} color="#ff7a2a" />
       </group>
     </Float>
   );
@@ -162,9 +209,10 @@ export default function MW3D() {
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 0, 6], fov: 32 }}
     >
-      <ambientLight intensity={0.7} />
-      <directionalLight position={[4, 5, 6]} intensity={1.6} />
-      <directionalLight position={[-5, 2, 3]} intensity={0.8} />
+      <ambientLight intensity={0.55} />
+      <directionalLight position={[4, 5, 6]} intensity={1.3} />
+      <directionalLight position={[-5, 2, 3]} intensity={0.7} />
+      <SweepLight />
 
       {/* Mostly-white studio with just a hint of warm/cool in the reflections. */}
       <Environment resolution={256} frames={1}>
@@ -173,7 +221,7 @@ export default function MW3D() {
         <Lightformer color="#ffffff" intensity={7} position={[-1.4, 2, 5]} scale={[1.6, 1.6, 1]} />
         <Lightformer color="#ffffff" intensity={3} position={[-2, 2.5, 4]} scale={[5, 5, 1]} />
         <Lightformer color="#ffffff" intensity={2.2} position={[3, 1.5, 4]} scale={[5, 5, 1]} />
-        <Lightformer color="#ffd9b0" intensity={1} position={[2, -2, 3]} scale={[4, 4, 1]} />
+        <Lightformer color="#ffd9b0" intensity={1.1} position={[2, -2, 3]} scale={[4, 4, 1]} />
         <Lightformer color="#bcd0ff" intensity={0.8} position={[0, 3, -4]} scale={[5, 4, 1]} />
       </Environment>
 

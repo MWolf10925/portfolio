@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import {
   motion,
@@ -14,7 +14,7 @@ import { Magnetic } from "@/components/effects/magnetic";
 import { Logo } from "@/components/brand/logo";
 import { site } from "@/data/site";
 
-// 3D hero is desktop-only and lazy (WebGL never blocks first paint / mobile).
+// 3D monogram — desktop-only, lazy (WebGL never blocks first paint / mobile).
 const MW3D = dynamic(() => import("@/components/three/mw-3d"), { ssr: false });
 
 const container = {
@@ -45,16 +45,7 @@ const wordVariant = {
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const spotlightRef = useRef<HTMLDivElement>(null);
-  const [show3D, setShow3D] = useState(false);
   const reduce = useReducedMotion();
-
-  useEffect(() => {
-    const ok =
-      window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setShow3D(ok);
-  }, []);
 
   // Cinematic exit: the headline drifts up and fades as you scroll past it.
   // Linked to scroll position (never moves on its own), so it can't feel queasy.
@@ -64,14 +55,8 @@ export function Hero() {
   });
   const exitY = useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
   const exitOpacity = useTransform(scrollYProgress, [0, 0.72], [1, 0]);
-
-  function handleMove(e: React.MouseEvent<HTMLElement>) {
-    const el = spotlightRef.current;
-    if (!el) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-    el.style.setProperty("--my", `${e.clientY - rect.top}px`);
-  }
+  // The 3D monogram fades gently as the hero clears.
+  const sceneOpacity = useTransform(scrollYProgress, [0, 0.92], [1, 0]);
 
   const words = site.hero.headline.split(" ");
 
@@ -79,19 +64,17 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      onMouseMove={handleMove}
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[hsl(20_14%_4%)]"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[hsl(30_4%_5%)]"
     >
-      <div ref={spotlightRef} className="spotlight pointer-events-none absolute inset-0 -z-10" />
-
-      {/* 3D MW monogram (desktop) — or a faint flat watermark (tablet) */}
-      {show3D ? (
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <MW3D />
-        </div>
-      ) : (
-        <Logo className="pointer-events-none absolute -right-10 top-1/2 -z-10 hidden h-[34rem] w-[34rem] -translate-y-1/2 text-foreground opacity-[0.04] md:block lg:hidden" />
-      )}
+      {/* Desktop: 3D monogram (calm float + parallax, fades on scroll).
+          Tablet (no WebGL): a faint flat MW watermark instead. */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-0 hidden lg:block"
+        style={reduce ? undefined : { opacity: sceneOpacity }}
+      >
+        <MW3D />
+      </motion.div>
+      <Logo className="pointer-events-none absolute -right-10 top-1/2 -z-10 hidden h-[34rem] w-[34rem] -translate-y-1/2 text-foreground opacity-[0.05] md:block lg:hidden" />
 
       <motion.div
         className="container relative z-10 max-w-3xl"

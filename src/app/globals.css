@@ -6,35 +6,36 @@
 @tailwind utilities;
 
 /*
-  Premium dark theme — charcoal / slate base with a muted blue primary.
-  Orange is reserved as a rare robotics accent (--robotics) only.
+  Matte black + neutral charcoal gray base, with the brand orange accent.
+  The gray carries a faint warmth (hue ~30, very low saturation) so it sits
+  with the orange logo instead of fighting it; a cool/blue gray would clash.
 */
 @layer base {
   :root {
-    /* Black / white / orange — built around the MW logo. */
-    --background: 22 9% 8%;
-    --foreground: 30 12% 96%;
+    /* Matte black / charcoal gray / orange — built around the MW logo. */
+    --background: 30 4% 7%;
+    --foreground: 36 6% 96%;
 
-    --card: 24 8% 12%;
-    --card-foreground: 30 12% 96%;
+    --card: 30 4% 11%;
+    --card-foreground: 36 6% 96%;
 
-    --muted: 24 8% 17%;
-    --muted-foreground: 28 9% 68%;
+    --muted: 30 4% 16%;
+    --muted-foreground: 33 5% 67%;
 
     --primary: 20 90% 54%;
-    --primary-foreground: 24 40% 7%;
+    --primary-foreground: 24 35% 8%;
 
-    --secondary: 24 8% 13%;
-    --secondary-foreground: 30 12% 92%;
+    --secondary: 30 4% 12%;
+    --secondary-foreground: 36 6% 92%;
 
-    --accent: 22 35% 13%;
-    --accent-foreground: 30 12% 95%;
+    --accent: 30 5% 14%;
+    --accent-foreground: 36 6% 95%;
 
-    /* Brand orange (same as primary now). */
+    /* Brand orange (same as primary). */
     --robotics: 20 90% 54%;
 
-    --border: 26 9% 20%;
-    --input: 26 9% 20%;
+    --border: 30 4% 20%;
+    --input: 30 4% 20%;
     --ring: 20 90% 54%;
 
     --radius: 0.5rem;
@@ -91,6 +92,21 @@
     pointer-events: none;
   }
 
+  /* Subtle cinematic vignette: darken the far edges for depth. Sits above the
+     section backgrounds but below the nav/rail so corners feel deeper. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(
+      135% 125% at 50% 36%,
+      transparent 62%,
+      hsl(30 6% 2% / 0.45) 100%
+    );
+  }
+
   ::selection {
     background: hsl(var(--primary) / 0.25);
   }
@@ -101,6 +117,18 @@
     outline-offset: 2px;
     border-radius: 2px;
   }
+}
+
+/* Fine film grain over the whole page (premium texture; static, GPU-cheap). */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
 }
 
 @layer utilities {
@@ -133,8 +161,8 @@
   background: linear-gradient(
     180deg,
     hsl(var(--background)) 0%,
-    hsl(26 9% 11%) 26%,
-    hsl(26 9% 11%) 74%,
+    hsl(30 4% 11%) 26%,
+    hsl(30 4% 11%) 74%,
     hsl(var(--background)) 100%
   );
 }
@@ -220,16 +248,6 @@
 @keyframes drift1 { to { transform: translate(8rem, 6rem) scale(1.15); } }
 @keyframes drift2 { to { transform: translate(-7rem, 9rem) scale(1.1); } }
 @keyframes drift3 { to { transform: translate(-6rem, -8rem) scale(1.2); } }
-
-/* ── Cursor spotlight (hero) ──────────────────────────────────────────────── */
-.spotlight {
-  background: radial-gradient(
-    32rem 32rem at var(--mx, 50%) var(--my, 0%),
-    hsl(22 90% 55% / 0.16),
-    transparent 70%
-  );
-  transition: background 0.15s ease-out;
-}
 
 /* ── Spotlight card glow (light sheen following cursor over the card) ─────── */
 .glow-card {
