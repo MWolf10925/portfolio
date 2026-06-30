@@ -20,8 +20,32 @@ export const site = {
   },
 
   hero: {
-    headline: "I build robotics, automation, and AI tools.",
-    subheadline: "High school developer and VEX robotics lead programmer.",
+    headline: "I turn hard problems into things that ship.",
+    subheadline:
+      "High school developer and Worlds-qualified VEX robotics lead programmer, building robotics autonomy, automation, and AI tools that actually run.",
+    primaryCta: { label: "See what I've shipped", href: "#projects" },
+    secondaryCta: { label: "Start a conversation", href: "#contact" },
+  },
+
+  // Short thesis section — the differentiator, stated plainly.
+  approach: {
+    eyebrow: "The difference",
+    heading: "Most people talk about building. I ship.",
+    body: "Plenty of people can describe an idea. Fewer take it all the way. I work in the gap between a cool idea and something that actually runs, then I document the whole way there. Autonomous routines that win matches, a Chrome extension live in the store, AI tools running on real machines.",
+    pillars: [
+      {
+        title: "Robotics autonomy",
+        body: "C++ autonomous systems, odometry, and sensor feedback for a Worlds-qualified VEX robot.",
+      },
+      {
+        title: "Shipped software",
+        body: "A CRM-importer Chrome extension and companion iOS and Android apps, live in real stores.",
+      },
+      {
+        title: "AI and automation",
+        body: "Local-first AI assistants and workflow tools that solve actual day-to-day problems.",
+      },
+    ],
   },
 
   education: [
@@ -60,7 +84,7 @@ export const site = {
   },
 
   contact: {
-    heading: "Want to connect?",
-    body: "I'm open to internships, project-based work, mentorship, robotics/software opportunities, and conversations with builders, founders, and technical teams.",
+    heading: "Let's build something.",
+    body: "I'm looking for internships and project-based software work. If you're a founder, engineer, or team that ships, I'd love to talk. Email is the fastest way to reach me.",
   },
 } as const;

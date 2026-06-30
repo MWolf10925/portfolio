@@ -1,7 +1,8 @@
 import { ArrowUpRight, Lock, Star } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { TransitionLink } from "@/components/effects/page-transition";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SpotlightCard } from "@/components/effects/spotlight-card";
@@ -21,7 +22,13 @@ function FeaturedRow({ project, flip }: { project: Project; flip: boolean }) {
     <Reveal className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
       <div className={flip ? "md:order-2" : ""}>
         <SpotlightCard tilt={4}>
-          <ProjectMedia src={project.image} alt={project.title} parallax reveal />
+          <ProjectMedia
+            src={project.image}
+            alt={project.title}
+            placeholder={project.placeholder}
+            parallax
+            reveal
+          />
         </SpotlightCard>
       </div>
 
@@ -50,14 +57,26 @@ function FeaturedRow({ project, flip }: { project: Project; flip: boolean }) {
             </Badge>
           ))}
         </div>
-        {project.href && (
-          <div className="mt-6">
-            <Button asChild variant="outline" size="sm">
-              <a href={project.href} target="_blank" rel="noopener noreferrer">
-                View project
+        {(project.caseStudy || project.href) && (
+          <div className="mt-6 flex flex-wrap gap-3">
+            {project.caseStudy && (
+              <TransitionLink
+                href={project.caseStudy}
+                className={buttonVariants({ size: "sm" })}
+                data-cursor="grow"
+              >
+                Read the case study
                 <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </Button>
+              </TransitionLink>
+            )}
+            {project.href && (
+              <Button asChild variant="outline" size="sm">
+                <a href={project.href} target="_blank" rel="noopener noreferrer">
+                  View on GitHub
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </Button>
+            )}
           </div>
         )}
       </div>

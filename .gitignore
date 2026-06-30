@@ -37,3 +37,7 @@ next-env.d.ts
 /public/logo.png.png
 
 .devlog.txt
+
+# local dev server logs
+.dev-out.log
+.dev-err.log

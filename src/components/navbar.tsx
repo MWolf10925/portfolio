@@ -8,10 +8,9 @@ import { Logo } from "@/components/brand/logo";
 import { site } from "@/data/site";
 
 const nav = [
-  { label: "Projects", href: "#projects" },
-  { label: "Games", href: "#games" },
+  { label: "Work", href: "#projects" },
+  { label: "Approach", href: "#approach" },
   { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];

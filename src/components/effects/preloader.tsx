@@ -20,7 +20,7 @@ export function Preloader() {
     const t = setTimeout(() => {
       sessionStorage.setItem("intro-seen", "1");
       setShow(false);
-    }, 2100);
+    }, 1400);
     return () => clearTimeout(t);
   }, []);
 

@@ -14,9 +14,25 @@ export interface Project {
   /** Path under /public, e.g. "/projects/robotics.jpg". Shows a branded
    *  placeholder frame until set. Featured projects render as big image rows. */
   image?: string;
+  /** Custom label shown in the placeholder frame when the image is missing
+   *  (e.g. a flagship project whose screenshots are not public yet). */
+  placeholder?: string;
+  /** Internal case-study route, e.g. "/work/instant-quote". Renders a
+   *  curtain-transition link instead of (or alongside) an external href. */
+  caseStudy?: string;
 }
 
 export const projects: Project[] = [
+  {
+    title: "Instant Quote · CRM Importer & Automation",
+    description:
+      "Built and shipped a CRM-importer Chrome extension during my internship, live on the Chrome Web Store, plus companion iOS and Android apps. One-click import of 100+ client records (notes, invoices, jobs, payments, locations), Stripe tap-to-pay, background and fleet tracking, and Supabase auth.",
+    tags: ["TypeScript", "React", "Supabase", "Capacitor", "iOS / Android"],
+    status: "Internship · Shipped",
+    featured: true,
+    image: "/projects/iq-dashboard.png",
+    caseStudy: "/work/instant-quote",
+  },
   {
     title: "Robotics Autonomous Systems",
     description:
@@ -24,7 +40,7 @@ export const projects: Project[] = [
     tags: ["C++", "VEX V5", "Odometry", "Sensors", "Autonomous"],
     status: "Competition",
     featured: true,
-    image: "/projects/robotics.jpg",
+    image: "/projects/robot-dark.jpg",
     href: "https://github.com/MWolf10925/pushback-heroic-telemetry",
   },
   {
@@ -34,17 +50,9 @@ export const projects: Project[] = [
     tags: ["VEX V5", "Lead Programmer", "Worlds", "Autonomous", "Notebook"],
     status: "Worlds Qualified",
     featured: true,
-    image: "/projects/competition.jpg",
+    image: "/projects/robotics.jpg",
+    caseStudy: "/work/robotics",
     href: "https://github.com/MWolf10925/robotics-autonomous-systems-case-study",
-  },
-  {
-    title: "Instant Quote · CRM Importer & Automation",
-    description:
-      "Built and shipped a CRM-importer Chrome extension during my internship, live on the Chrome Web Store, plus companion iOS and Android apps. One-click import of 100+ client records (notes, invoices, jobs, payments, locations), Stripe tap-to-pay, background and fleet tracking, and Supabase auth.",
-    tags: ["TypeScript", "Chrome Extension", "Stripe", "Supabase", "Cloud Run"],
-    status: "Internship · Shipped",
-    featured: true,
-    image: "/projects/instant-quote.jpg",
   },
   {
     title: "Private Robotics PID Tuning Workflow",

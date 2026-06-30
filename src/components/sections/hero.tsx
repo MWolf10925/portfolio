@@ -32,7 +32,7 @@ const item = {
 };
 
 // Key words rendered in solid brand orange in the headline.
-const ACCENT_WORDS = new Set(["robotics", "automation", "AI"]);
+const ACCENT_WORDS = new Set(["ship", "shipped", "robotics", "automation", "AI"]);
 
 const wordVariant = {
   hidden: { opacity: 0, y: "0.6em" },
@@ -116,17 +116,17 @@ export function Hero() {
         <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-3">
           <Magnetic>
             <Button asChild size="lg">
-              <a href="#projects">
-                View Projects
+              <a href={site.hero.primaryCta.href}>
+                {site.hero.primaryCta.label}
                 <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
           </Magnetic>
           <Magnetic>
             <Button asChild size="lg" variant="outline">
-              <a href="#contact">
+              <a href={site.hero.secondaryCta.href}>
                 <Mail className="h-4 w-4" />
-                Contact
+                {site.hero.secondaryCta.label}
               </a>
             </Button>
           </Magnetic>

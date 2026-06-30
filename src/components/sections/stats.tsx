@@ -4,7 +4,7 @@ import { bigStats, proofPoints } from "@/data/stats";
 
 export function Stats() {
   return (
-    <section className="sec sec-alt">
+    <section id="proof" className="sec sec-alt scroll-mt-20">
       <div className="container py-16">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">

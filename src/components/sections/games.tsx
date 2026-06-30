@@ -17,7 +17,7 @@ export function Games() {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {games.map((game, i) => (
-            <Reveal key={game.title} index={i % 4}>
+            <Reveal key={game.title} index={i % 4} className="h-full">
               <SpotlightCard className="h-full" tilt={6}>
                 <div className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors duration-300 hover:border-primary/50">
                   <ProjectMedia src={game.image} alt={`${game.title} cover art`} aspect="aspect-square" />

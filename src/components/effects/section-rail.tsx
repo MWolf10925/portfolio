@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 
 const sections = [
   { id: "top", label: "Top" },
-  { id: "projects", label: "Projects" },
-  { id: "games", label: "Games" },
+  { id: "approach", label: "Approach" },
+  { id: "process", label: "Process" },
+  { id: "projects", label: "Work" },
   { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "contact", label: "Contact" },
 ];

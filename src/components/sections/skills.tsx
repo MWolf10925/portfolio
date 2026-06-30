@@ -14,7 +14,7 @@ export function Skills() {
       <div className="container mt-8">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {skillGroups.map((group, i) => (
-            <Reveal key={group.title} index={i % 2}>
+            <Reveal key={group.title} index={i % 2} className="h-full">
               <Card className="h-full p-6">
                 <h3 className="mb-4 font-mono text-sm uppercase tracking-wider text-muted-foreground">
                   {group.title}

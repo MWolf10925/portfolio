@@ -1,12 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ImageIcon } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 
 /**
- * Shows the project photo if it loads; otherwise a branded placeholder frame.
+ * Shows the project photo (via next/image, so it is responsive + AVIF/WebP) if
+ * it loads; otherwise a branded placeholder frame with an optional label.
  * When `parallax` is set, the image drifts within its frame as you scroll.
  * Drop real images in /public/projects/ and they appear automatically.
  */
@@ -16,6 +18,7 @@ export function ProjectMedia({
   aspect = "aspect-[16/10]",
   parallax = false,
   reveal = false,
+  placeholder,
 }: {
   src?: string;
   alt: string;
@@ -23,6 +26,8 @@ export function ProjectMedia({
   parallax?: boolean;
   /** Clip-path wipe as the frame scrolls into view (featured rows). */
   reveal?: boolean;
+  /** Custom label for the placeholder frame when no image is present. */
+  placeholder?: string;
 }) {
   const [errored, setErrored] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -46,35 +51,26 @@ export function ProjectMedia({
       className={`group relative ${aspect} w-full overflow-hidden rounded-lg border border-border bg-card`}
     >
       {showImage ? (
-        useParallax ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <motion.img
-            src={src}
+        <motion.div
+          style={useParallax ? { y } : undefined}
+          className="absolute inset-x-0 -top-[8%] h-[116%] w-full"
+        >
+          <Image
+            src={src as string}
             alt={alt}
-            loading="lazy"
-            decoding="async"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             onError={() => setErrored(true)}
-            style={{ y }}
-            className="absolute inset-x-0 -top-[10%] h-[120%] w-full object-cover"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={src}
-            alt={alt}
-            loading="lazy"
-            decoding="async"
-            onError={() => setErrored(true)}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-        )
+        </motion.div>
       ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-card via-background to-card">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-card via-background to-card px-6 text-center">
           <div className="grid-texture absolute inset-0 opacity-40" />
-          <Logo className="relative h-20 w-20 opacity-25" />
-          <span className="relative inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground/60">
+          <Logo className="relative h-16 w-16 opacity-25" />
+          <span className="relative inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground/70">
             <ImageIcon className="h-3.5 w-3.5" />
-            photo
+            {placeholder ?? "photo"}
           </span>
         </div>
       )}
