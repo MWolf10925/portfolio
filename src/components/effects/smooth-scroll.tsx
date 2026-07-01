@@ -39,7 +39,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     const finePointer = window.matchMedia("(pointer: fine)").matches;
     const OFFSET = 64; // sticky navbar height
-    const EDGE = 48; // tolerance for "this section's edge is reached"
+    // Small tolerance for "this section's edge is reached". Kept tight so a tall
+    // section (the ship-path scene, the experience/resume timeline) is scrolled
+    // essentially all the way to its bottom before the snap advances — a larger
+    // value let it jump early, cutting off the last of the section.
+    const EDGE = 10;
 
     let animating = false;
     let cooldownUntil = 0;

@@ -3,11 +3,13 @@ import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/reveal";
 import { MaskText } from "@/components/animations/mask-text";
 import { ScrollRevealText } from "@/components/animations/scroll-reveal-text";
+import { SectionDecor } from "@/components/decor/section-decor";
 import { site } from "@/data/site";
 
 export function About() {
   return (
-    <section id="about" className="sec scroll-mt-20 py-16 sm:py-24">
+    <section id="about" className="sec isolate scroll-mt-20 py-16 sm:py-24">
+      <SectionDecor preset="about" />
       <div className="container">
         {/* Heading + philosophy */}
         <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr]">

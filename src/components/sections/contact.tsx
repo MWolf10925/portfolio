@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { MaskText } from "@/components/animations/mask-text";
 import { Magnetic } from "@/components/effects/magnetic";
+import { SectionDecor } from "@/components/decor/section-decor";
 import { site } from "@/data/site";
 
 export function Contact() {
@@ -10,7 +11,8 @@ export function Contact() {
   const hasGithub = Boolean(site.links.github) && (site.links.github as string) !== "#";
 
   return (
-    <section id="contact" className="sec sec-alt scroll-mt-20 py-20 sm:py-28">
+    <section id="contact" className="sec sec-alt isolate scroll-mt-20 py-20 sm:py-28">
+      <SectionDecor preset="contact" />
       <div className="container">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">

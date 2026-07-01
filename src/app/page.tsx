@@ -4,6 +4,7 @@ import { Preloader } from "@/components/effects/preloader";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { SectionRail } from "@/components/effects/section-rail";
 import { SectionTransition } from "@/components/effects/section-transition";
+import { SceneBand } from "@/components/decor/scene-band";
 import { Hero } from "@/components/sections/hero";
 import { Stats } from "@/components/sections/stats";
 import { Approach } from "@/components/sections/approach";
@@ -35,8 +36,10 @@ export default function Home() {
           <Stats />
         </SectionTransition>
 
-        {/* Thesis → native masked-text + word reveal */}
-        <Approach />
+        {/* Thesis → curtain cover so the scene beyond stays hidden until reveal */}
+        <SectionTransition variant="curtain">
+          <Approach />
+        </SectionTransition>
 
         {/* Signature scene (sticky — never wrapped) */}
         <ShipPath />
@@ -51,8 +54,18 @@ export default function Home() {
           <Games />
         </SectionTransition>
 
-        {/* How I build → native scroll-reveal copy */}
-        <About />
+        {/* Cinematic 3D interstitial — the single big scene beat, mid-page.
+            Purely decorative; fades in and out at its edges into the matte bg. */}
+        <SceneBand
+          src="/decor/scenes/isometric.png"
+          intensity={0.55}
+          className="h-[40vh] sm:h-[56vh]"
+        />
+
+        {/* How I build → doors cover */}
+        <SectionTransition variant="doors">
+          <About />
+        </SectionTransition>
 
         {/* Skills → curtain wipe */}
         <SectionTransition variant="curtain">
@@ -64,8 +77,10 @@ export default function Home() {
           <Experience />
         </SectionTransition>
 
-        {/* FAQ → native staggered rows */}
-        <Faq />
+        {/* FAQ → doors cover so Contact stays hidden until reveal */}
+        <SectionTransition variant="doors">
+          <Faq />
+        </SectionTransition>
 
         {/* Final CTA → curtain bookend (echoes the page-transition curtain) */}
         <SectionTransition variant="curtain">

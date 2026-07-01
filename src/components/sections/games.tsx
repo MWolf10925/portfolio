@@ -4,11 +4,13 @@ import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SpotlightCard } from "@/components/effects/spotlight-card";
 import { ProjectMedia } from "@/components/sections/project-media";
+import { SectionDecor } from "@/components/decor/section-decor";
 import { games } from "@/data/games";
 
 export function Games() {
   return (
-    <section id="games" className="sec sec-alt scroll-mt-20 py-16 sm:py-24">
+    <section id="games" className="sec sec-alt isolate scroll-mt-20 py-16 sm:py-24">
+      <SectionDecor preset="games" />
       <div className="container">
         <SectionHeading
           title="Games I've built"

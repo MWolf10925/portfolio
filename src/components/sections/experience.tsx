@@ -1,13 +1,15 @@
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
+import { SectionDecor } from "@/components/decor/section-decor";
 import { experience } from "@/data/experience";
 
 export function Experience() {
   return (
     <section
       id="experience"
-      className="sec scroll-mt-20 py-16 sm:py-24"
+      className="sec isolate scroll-mt-20 py-16 sm:py-24"
     >
+      <SectionDecor preset="experience" />
       <div className="container">
         <SectionHeading title="Experience" />
 

@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
+import { SectionDecor } from "@/components/decor/section-decor";
 import { faqs } from "@/data/faq";
 
 /**
@@ -9,7 +10,8 @@ import { faqs } from "@/data/faq";
  */
 export function Faq() {
   return (
-    <section id="faq" className="sec scroll-mt-20 py-16 sm:py-24">
+    <section id="faq" className="sec isolate scroll-mt-20 py-16 sm:py-24">
+      <SectionDecor preset="faq" />
       <div className="container">
         <SectionHeading
           title="Questions you might have"

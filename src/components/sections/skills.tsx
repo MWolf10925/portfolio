@@ -2,11 +2,13 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
+import { SectionDecor } from "@/components/decor/section-decor";
 import { skillGroups } from "@/data/skills";
 
 export function Skills() {
   return (
-    <section id="skills" className="sec sec-alt scroll-mt-20 py-16 sm:py-24">
+    <section id="skills" className="sec sec-alt isolate scroll-mt-20 py-16 sm:py-24">
+      <SectionDecor preset="skills" />
       <div className="container">
         <SectionHeading title="Skills" />
       </div>
