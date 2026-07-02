@@ -78,23 +78,47 @@ const FLY: FlyAsset[] = [
   { src: "flat/bar-orange.png", w: 240, left: "50%", top: "50%", dx: "-74vw", dy: "0vh", ox: "74vw", oy: "0vh", fr: -14, r: -14, or: -14, op: 0.9, d: 0.14 },
 ];
 
+// True 3D flight path: each icon starts deep in the scene (negative z, small
+// and far away), rushes forward to its resting spot, then blasts PAST the
+// camera (positive z + scale) as the new page reveals — a fly-through, not a
+// flat slide. rotateY adds a spin around the vertical axis while travelling.
 const flyVariants = (a: FlyAsset) => ({
-  idle: { x: a.dx, y: a.dy, rotate: a.fr, opacity: 0, transition: { duration: 0 } },
+  idle: {
+    x: a.dx,
+    y: a.dy,
+    z: -650,
+    rotate: a.fr,
+    rotateY: a.fr * 1.6,
+    opacity: 0,
+    transition: { duration: 0 },
+  },
   cover: {
     x: "0vw",
     y: "0vh",
+    z: 0,
     rotate: a.r,
+    rotateY: 0,
     opacity: a.op,
-    transition: { duration: 0.5, ease: EASE_OUT, delay: 0.06 + a.d },
+    transition: { duration: 0.55, ease: EASE_OUT, delay: 0.06 + a.d },
   },
   reveal: {
     x: a.ox ?? a.dx,
     y: a.oy ?? a.dy,
+    z: 520,
     rotate: a.or,
+    rotateY: a.fr * -1.2,
     opacity: 0,
-    transition: { duration: 0.42, ease: EASE, delay: a.d * 0.4 },
+    transition: { duration: 0.46, ease: EASE, delay: a.d * 0.4 },
   },
 });
+
+// The orange glow blooms outward on reveal — reads as passing through a door
+// of light into the new page.
+const glow = {
+  idle: { opacity: 0, scale: 1, transition: { duration: 0 } },
+  cover: { opacity: 1, scale: 1, transition: { duration: 0.3, ease: EASE } },
+  reveal: { opacity: 0, scale: 1.45, transition: { duration: 0.4, ease: EASE } },
+};
 
 // Orange path-line that draws across the stage (echoes the ship-path scene).
 const lineVariants = {
@@ -176,13 +200,14 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
       >
         {/* Dark stage the icons perform on. */}
         <motion.div variants={veil} className="absolute inset-0 bg-[hsl(30_4%_6%)]" />
-        {/* Soft orange glow so the stage has depth, not dead flat. */}
+        {/* Soft orange glow: gives the stage depth, then blooms outward on
+            reveal like passing through a door of light. */}
         <motion.div
-          variants={veil}
+          variants={glow}
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(60rem 42rem at 50% 45%, hsl(22 90% 54% / 0.10), transparent 60%)",
+              "radial-gradient(60rem 42rem at 50% 45%, hsl(22 90% 54% / 0.12), transparent 60%)",
           }}
         />
 
@@ -216,10 +241,11 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
           <Logo className="h-16 w-16 text-foreground/70" />
         </motion.div>
 
-        {/* The brand icon swarm — rushes in to blanket the screen, then scatters.
-            Outer div anchors + centres (static transform); inner motion.img owns
-            the fly translate/rotate so the two transforms never fight. */}
-        <div className="absolute inset-0">
+        {/* The brand icon swarm — flies in from deep 3D space to blanket the
+            screen, then blasts past the camera on reveal. Outer div anchors +
+            centres (static transform); inner motion.img owns the 3D flight so
+            the two transforms never fight. */}
+        <div className="absolute inset-0" style={{ perspective: 1100 }}>
           {FLY.map((a) => (
             <div
               key={a.src}
@@ -234,6 +260,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
                 loading="eager"
                 variants={flyVariants(a)}
                 className="block w-full select-none"
+                style={{ transformPerspective: 1100, willChange: "transform" }}
               />
             </div>
           ))}

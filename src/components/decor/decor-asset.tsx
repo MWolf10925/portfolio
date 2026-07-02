@@ -116,12 +116,23 @@ export function DecorAsset({
     <motion.div ref={ref} className={`absolute ${size} ${className}`} style={{ y, opacity }}>
       <motion.div
         initial={{ rotate }}
-        animate={float ? { y: [0, -float, 0], rotate: [rotate, rotate + 1.4, rotate] } : { rotate }}
+        animate={
+          float
+            ? {
+                y: [0, -float, 0],
+                rotate: [rotate, rotate + 1.4, rotate],
+                // Gentle sway around the vertical axis — reads as an object
+                // drifting in space rather than a flat sticker.
+                rotateY: [0, 6, 0],
+              }
+            : { rotate }
+        }
         transition={
           float
             ? { duration: dur, repeat: Infinity, ease: "easeInOut", delay }
             : undefined
         }
+        style={{ transformPerspective: 800 }}
       >
         {img}
       </motion.div>
